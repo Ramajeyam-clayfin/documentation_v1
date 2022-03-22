@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image} from "react-native"
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, KeyboardAvoidingView} from "react-native"
 import { StatusBar } from 'expo-status-bar';
-import React,{useState, useContext } from 'react'
+import React,{useState, useEffect } from 'react'
 import { Validation } from "./Validation"
 import { Datas } from "../Context/Context";
 
 export const Login = () => {
-    const { setemailerror,setpasserror, emailerror, passerror} = useContext(Datas)
+    const { setemailerror,setpasserror, emailerror, passerror, setLogin} = React.useContext(Datas)
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,6 +13,7 @@ export const Login = () => {
         let result = Validation(email, password);
         setemailerror(result.errormessageuser)
         setpasserror(result.errormessagepass)
+        result.errormessageuser.length || result.errormessagepass.length ? setLogin(false) : setLogin(true)
 
     }
 
@@ -24,18 +25,18 @@ export const Login = () => {
         
            
             <View style={styles.inputView}>
-                <TextInput
+              <TextInput
                 style={styles.TextInput}
                 placeholder="Email"
                 placeholderTextColor="#20232a"
                 onChangeText={(email) => setEmail(email)}
-                />
-                {/* </View>
-                {emailerror.length > 0 &&
-                  <Text>{emailerror}</Text>
-                }
-                <View> */}
+              />
+              
             </View>
+            {emailerror.length ?
+                   <Text style={{color:"red", marginBottom: 10,}}>{emailerror}</Text> :  null
+                }
+                
         
             <View style={styles.inputView}>
                 <TextInput
@@ -45,13 +46,17 @@ export const Login = () => {
                 secureTextEntry={true}
                 onChangeText={(password) => setPassword(password)}
                 />
+                
             </View>
+            {passerror.length ?
+                   <Text style={{color:"red", marginBottom: 10,}}>{passerror}</Text> :  null
+                }
         
             <TouchableOpacity>
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
         
-            <TouchableOpacity style={styles.loginBtn} onPress={loginhandler()}>
+            <TouchableOpacity style={styles.loginBtn} onPress={()=>loginhandler()}>
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
         </View>
@@ -63,7 +68,6 @@ const styles = StyleSheet.create({
       backgroundColor: "#20232a",
       alignItems: "center",
       justifyContent: "center",
-    //   top:15
     },
    
     image: {
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
       height: 50,
       flex: 1,
       padding: 10,
-      marginLeft: 20,
+      // marginLeft: 20,
     },
    
     forgot_button: {

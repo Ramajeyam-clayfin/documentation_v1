@@ -1,7 +1,5 @@
 import React from "react"
 import { createDrawerNavigator } from "@react-navigation/drawer"
-import {Image, SafeAreaView, View} from 'react-native'
-import { Ionicons, } from "@expo/vector-icons";
 
 import { Home }  from "./Home"
 import { Guides } from "./Navigation/Guides/Home";
@@ -12,6 +10,8 @@ import { Blog } from "./Navigation/Blog/Home";
 import { Versions } from "./Navigation/Versions/Home";
 import { Github } from "./Navigation/Github/Home";
 
+import { DataProvider } from './Context/Context';
+
 const Drawer = createDrawerNavigator();
 
 
@@ -19,11 +19,13 @@ const Drawer = createDrawerNavigator();
  function Navigation () {
 
     return(
+        <DataProvider>
            <Drawer.Navigator 
                 initialRouteName="home"
                  screenOptions={{
                     headerShown: false
                 }} >
+
                 <Drawer.Screen  name="Home"  component={Home} />
 
                 <Drawer.Screen name="Guides" component={Guides} />
@@ -40,6 +42,7 @@ const Drawer = createDrawerNavigator();
 
                 <Drawer.Screen name="Github" component={Github} />
             </Drawer.Navigator>
+            </DataProvider>
     )
 }
 

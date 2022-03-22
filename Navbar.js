@@ -1,9 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image,  } from 'react-native';
 import { Ionicons, } from "@expo/vector-icons";
+import React from 'react';
+import { Datas } from './Context/Context';
+
 
 export const Navbar = ({navigation}) => {
-    // const { navigation } = props
+  const { setLogin} = React.useContext(Datas)
 
     return(
         <View style={styles.container}>
@@ -23,6 +26,15 @@ export const Navbar = ({navigation}) => {
                 size={26}
             />
           </View>
+          <View style={styles.logout}>
+          <Ionicons 
+                  name="log-out-outline"
+                  size={30}
+                  color="white"
+                  onPress={() => {setLogin(false) ; navigation.navigate("Home") }}
+              />
+          </View>
+            
         </View>
       </View>
     )
@@ -30,7 +42,7 @@ export const Navbar = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex:0.06,
+    flex:0.08,
   },
   headertext:{
     color:'white',
@@ -39,7 +51,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold"
   },
   navbar:{
-    // flex:0.06,
+    flex:1,
     flexDirection:"row", 
     backgroundColor:"#20232a",
     width:"auto",
@@ -50,9 +62,13 @@ const styles = StyleSheet.create({
     width:35, 
     height:30,  
     backgroundColor:"white", 
-    marginLeft:120,
+    marginLeft:90,
     alignItems:"center",
     borderRadius:7
 
+  },
+  logout:{
+    color:"white",
+    marginLeft:5
   }
 });

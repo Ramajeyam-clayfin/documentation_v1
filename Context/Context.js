@@ -5,14 +5,13 @@ export const Datas = createContext();
 export const DataProvider = (props) =>{
     const [emailerror, setemailerror] = useState("");
     const [passerror, setpasserror] = useState("");
- 
- 
+    const [login, setLogin] = useState(true);
 
     return(
-         <div>
-            <Datas.Provider value={{emailerror, setemailerror, passerror, setpasserror  }} >
+         <>
+            <Datas.Provider value={{emailerror, setemailerror, passerror, setpasserror, login, setLogin  }} >
                 {props.children}
             </Datas.Provider>
-         </div>
+         </>
      );
 }
