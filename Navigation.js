@@ -1,5 +1,6 @@
 import React from "react"
 import { createDrawerNavigator } from "@react-navigation/drawer"
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Home }  from "./Home"
 import { Guides } from "./Navigation/Guides/Home";
@@ -12,7 +13,25 @@ import { Github } from "./Navigation/Github/Home";
 
 import { DataProvider } from './Context/Context';
 
+
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+
+
+import { Comp1 } from "./Navigation/Components/Comp1/Home";
+
+
+
+export  function StackNavigation() {
+    return (
+     
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Components" component={Components} />
+          <Stack.Screen name="Comp1" component={Comp1} />
+        </Stack.Navigator>
+    );
+  }
 
 
 
@@ -21,7 +40,7 @@ const Drawer = createDrawerNavigator();
     return(
         <DataProvider>
            <Drawer.Navigator 
-                initialRouteName="home"
+                initialRouteName="Components"
                  screenOptions={{
                     headerShown: false
                 }} >
@@ -30,7 +49,7 @@ const Drawer = createDrawerNavigator();
 
                 <Drawer.Screen name="Guides" component={Guides} />
 
-                <Drawer.Screen name="Components" component={Components} />
+                <Drawer.Screen name="Components" component={StackNavigation} />
 
                 <Drawer.Screen name="Api" component={Api} />
 

@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
     width:35, 
     height:30,  
     backgroundColor:"white", 
-    marginLeft:90,
+    marginLeft:80,
     alignItems:"center",
     borderRadius:7
 
   },
   logout:{
     color:"white",
-    marginLeft:5
+    marginLeft:15
   }
 });

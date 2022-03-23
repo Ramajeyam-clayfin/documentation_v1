@@ -26,7 +26,7 @@ export const Home = (props) => {
                       <TouchableHighlight 
                         style={styles.start_btn}
                         underlayColor="#f6affb"
-                        onPress={()=>null}
+                        onPress={()=>navigation.navigate("Guides")}
                         >
                         <Text>GET STARTED</Text>
                       </TouchableHighlight>
