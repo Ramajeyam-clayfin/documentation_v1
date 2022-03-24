@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableHighlight,   } from 'react-native';
 import { Navbar } from './Navbar';
 import { Login } from './Login/Login';
 import React from 'react'
@@ -33,7 +33,7 @@ export const Home = (props) => {
                       <TouchableHighlight 
                         style={styles.learn_btn}
                         // underlayColor="#ffff"
-                        onPress={()=>null}
+                        onPress={()=>navigation.navigate("Components")}
                         >
                         <Text style={{ color:'#61dafb', fontSize: 20}}>{"Learn Basics >"}</Text>
                       </TouchableHighlight>

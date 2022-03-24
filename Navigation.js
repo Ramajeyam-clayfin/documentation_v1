@@ -61,7 +61,7 @@ export  function StackNavigation() {
 
                 <Drawer.Screen name="Github" component={Github} />
             </Drawer.Navigator>
-            </DataProvider>
+        </DataProvider>
     )
 }
 
