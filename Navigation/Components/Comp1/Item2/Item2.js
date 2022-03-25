@@ -1,6 +1,6 @@
 import React, {useContext} from "react"
 import { Datas } from "../../../../Context/Context"
-import { View, Text, StyleSheet, Pressable, Linking, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, Pressable, Linking, TouchableOpacity, ScrollView } from "react-native"
 import {Data} from './Item2data'
 
 export const Item2 = () => {
@@ -11,13 +11,15 @@ export const Item2 = () => {
       <View style={styles.container1}>
         {temp.map((obj, index) => (
           <>
-            <Text key={index} style={{color:"#61dafb", fontSize:20, marginBottom:10}}>{obj.name}</Text>
+            <Text key={obj.id} style={{color:"#61dafb", fontSize:20, marginBottom:10}}>{obj.name}</Text>
             <View style={styles.container2}>
+            <ScrollView >
               <Text style={{color:"black", fontSize:10}}>{ obj.content}</Text>
+            </ScrollView>
             </View>
             <View style={styles.container3}>
               <TouchableOpacity onPress={()=>Linking.openURL(obj.link)} >
-                <Text style={{color:"white", fontSize:20}}>Try Out Example</Text>
+                <Text style={{color:"black", fontSize:20}}>Try Out Example</Text>
               </TouchableOpacity>
             </View>
           </>
@@ -40,7 +42,7 @@ export const Item2 = () => {
       
     },
     container2: { 
-      flex:0.8, 
+      flex:1, 
       alignContent:"center",
       alignSelf:"center", 
       backgroundColor:"white", 

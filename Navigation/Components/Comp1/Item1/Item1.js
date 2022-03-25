@@ -1,7 +1,7 @@
 
 import React,{useContext} from "react"
 import { View, Text, StyleSheet } from "react-native"
-import Data from './Item1.json'
+import Data from './Item1data.json'
 import { Datas } from "../../../../Context/Context"
 export const Item1 = () => {
     const { number} = useContext(Datas)

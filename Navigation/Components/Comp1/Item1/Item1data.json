@@ -7,17 +7,17 @@
     {
         "id":2,
         "name": "Text",
-        "content":"The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls.  View maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, <div>, android.view, etc.."
+        "content":"A React component for displaying text.\n\nText supports nesting, styling, and touch handling.\n\nIn the following example, \nthe nested title and body text will inherit the fontFamily from styles.baseText,\nbut the title provides its own additional styles.\nThe title and body will stack on top of each other on account of the literal newlines:"
     },
     {
         "id":3,
         "name": "Image",
-        "content":"The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls.  View maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, <div>, android.view, etc.."
+        "content":"A React component for displaying different types of images, including network images, static resources, temporary local images, and images from local disk, such as the camera roll.\nThis example shows fetching and displaying an image from local storage as well as one from network and even from data provided in the 'data:' uri scheme."
     },
     {
         "id":4,
         "name": "TextInput",
-        "content":"The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls.  View maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, <div>, android.view, etc.."
+        "content":"A foundational component for inputting text into the app via a keyboard. Props provide configurability for several features, such as auto-correction, auto-capitalization, placeholder text, and different keyboard types, such as a numeric keypad.\nThe most basic use case is to plop down a TextInput and subscribe to the onChangeText events to read the user input. There are also other events, such as onSubmitEditing and onFocus that can be subscribed to. A minimal example:"
     },
     {
         "id":5,
