@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "title":"View",
+        "desc":"The most fundamental component for building a UI."
+    },
+    {
+        "id":2,
+        "title":"Text",
+        "desc":"A React component for displaying text."
+    },
+    {
+        "id":3,
+        "title":"Image",
+        "desc":"A component for displaying images."
+    },
+    {
+        "id":4,
+        "title":"TextInput",
+        "desc":"A component for inputting text into the app via a keyboard."
+    },
+    {
+        "id":5,
+        "title":"ScrollView",
+        "desc":"Provides a scrolling container that can host multiple components and views."
+    },
+    {
+        "id":6,
+        "title":"StyleSheet",
+        "desc":"Provides a abstraction layer similar to CSS StyleSheets."
+    }
+]

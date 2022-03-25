@@ -1,10 +1,14 @@
 
+import React, {useContext} from "react"
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,  ScrollView, TouchableOpacity } from 'react-native';
 import { Navbar } from '../../Navbar';
+import { Datas } from "../../Context/Context";
+import HomeData from './HomeData.json'
 
 export const Components = (props) => {
     const { navigation } = props
+    const {number, setnumber} = useContext(Datas)
     console.log(navigation.navigate)
 
     return(
@@ -23,45 +27,19 @@ and APIs`}</Text>
                   </Text>
                  
                   <Text style={[styles.heading,{marginLeft:0}] }> Basic Components :</Text>
-                  <View style={{backgroundColor:'#f2f2f2', margin:25, marginBottom:20}}>
+                 
+                    <View style={{backgroundColor:'#f2f2f2', margin:25, marginBottom:20}}>
                     <Text style={{fontSize:18, margin:9, marginLeft:20 }}>Most apps will end up using one of these basic components.</Text>
-                    <TouchableOpacity onPress={()=> navigation.navigate("Comp1")}>
-                      <View style={styles.cardstyle}>
-                        <View style={styles.innercard1}><Text style={styles.innertext1}>View</Text></View>
-                        <View style={styles.innercard2}><Text style={styles.innertext2}>The most fundamental component for building a UI.</Text></View>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity >
-                      <View style={styles.cardstyle}>
-                        <View style={styles.innercard1}><Text style={styles.innertext1}>Text</Text></View>
-                        <View style={styles.innercard2}><Text style={styles.innertext2}>A React component for displaying text.</Text></View>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity >
-                      <View style={styles.cardstyle}>
-                        <View style={styles.innercard1}><Text style={styles.innertext1}>Image</Text></View>
-                        <View style={styles.innercard2}><Text style={styles.innertext2}>A component for displaying images.</Text></View>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity >
-                      <View style={styles.cardstyle}>
-                        <View style={styles.innercard1}><Text style={styles.innertext1}>TextInput</Text></View>
-                        <View style={styles.innercard2}><Text style={styles.innertext2}>A component for inputting text into the app via a keyboard.</Text></View>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity >
-                      <View style={styles.cardstyle}>
-                        <View style={styles.innercard1}><Text style={styles.innertext1}>ScrollView</Text></View>
-                        <View style={styles.innercard2}><Text style={styles.innertext2}>Provides a scrolling container that can host multiple components and views.</Text></View>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity >
-                      <View style={styles.cardstyle}>
-                        <View style={styles.innercard1}><Text style={styles.innertext1}>StyleSheet</Text></View>
-                        <View style={styles.innercard2}><Text style={styles.innertext2}>Provides a abstraction layer similar to CSS StyleSheets.</Text></View>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
+                    { HomeData.map((obj, index)=> (
+                      <TouchableOpacity onPress={()=> { setnumber(obj.id); navigation.navigate("Comp1");}}>
+                        <View style={styles.cardstyle}>
+                          <View style={styles.innercard1}><Text style={styles.innertext1}>{obj.title}</Text></View>
+                          <View style={styles.innercard2}><Text style={styles.innertext2}>{obj.desc}</Text></View>
+                        </View>
+                      </TouchableOpacity>
+                  )) }
+                 
+                   </View>
 
                   <Text style={[styles.heading,{marginLeft:0}] }> User Interface :</Text>
 
