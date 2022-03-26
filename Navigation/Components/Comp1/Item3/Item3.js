@@ -1,30 +1,43 @@
 import React, {useContext} from "react"
 import { Datas } from "../../../../Context/Context"
 
-import { View, Text, StyleSheet, Pressable, Linking, TouchableOpacity, ScrollView } from "react-native"
-import { Data } from "./Item3data";
+import { View, Text, StyleSheet, Pressable, Linking, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native"
+import Data  from "./Item3data.json";
+import WebView from "react-native-webview";
 
 
 export const Item3 = () => {
   const { number} = useContext(Datas)
   const temp = Data.filter(obj => obj.id === number )
+  const loading = () => {
+    return(
+      <ActivityIndicator  
+        size="large" 
+        color="#61dafb"
+        style={{flex:0.5, justifyContent: 'center', alignItems:"center"}} 
+      
+      />
+    )
+  }
     return(
       
       <View style={styles.container1}>
         {temp.map((obj, index)=>(
-          <>
-            <Text key={obj.id} style={{color:"#61dafb", fontSize:20, marginBottom:10}}>{obj.name}</Text>
+          <React.Fragment key={obj.id}>
+            <Text key={obj.id} style={{color:"white", fontSize:20, marginBottom:10}}>{obj.name}</Text>
             <View style={styles.container2}>
-            <ScrollView >
-              <Text style={{color:"black", fontSize:10}}>{obj.content}</Text>
-              </ScrollView>
+              <WebView
+                    source={{ uri: obj.link }}
+                    renderLoading={loading}
+                    startInLoadingState={true}
+                  />
             </View>
             <View style={styles.container3}>
               <TouchableOpacity onPress={()=>Linking.openURL(obj.link)}>
                 <Text style={{color:"black", fontSize:20}}>Try Out Example</Text>
               </TouchableOpacity>
             </View>
-          </>
+          </React.Fragment>
         ))}
         
          
@@ -44,13 +57,8 @@ export const Item3 = () => {
     },
     container2:{ 
       flex:1, 
-      alignContent:"center",
-      alignSelf:"center", 
       backgroundColor:"white", 
-      padding:10, 
       borderRadius:15, 
-      alignItems:"center", 
-      justifyContent:"center",
       borderColor:"#61dafb",
       borderWidth:4
 

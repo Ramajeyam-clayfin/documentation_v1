@@ -34,12 +34,13 @@ export const Guides = (props) => {
                   <Text style={{fontSize:18, margin:15}}>This introduction lets you get started immediately 
                     in your browser with interactive examples like this one :</Text>
 
-                    <View style={{height:200, margin:20 , flexDirection:"row", marginBottom:20, }}>
+                      <View style={{height:500, margin:20 , flexDirection:"row", marginBottom:20, }}>
                       <WebView
-                        source={{  html: '<script async src="https://snack.expo.dev/embed.js"></script><div data-snack-id="@ramajeyam/hello-world" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:100%;width:auto"></div>' }}
-                        style={{ }}
+                        // source={{  html: '<script async src="https://snack.expo.dev/embed.js"></script><div data-snack-id="@ramajeyam/hello-world" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:100%;width:auto"></div>' }}
+                        source={{  uri: 'https://snack.expo.dev/@ramajeyam/hello-world' }}
+                        style={{marginTop:19 }}
                       />
-                    </View>
+                      </View>
                     <Text style={{fontSize:18, margin:15, marginBottom:20}}>The above is a Snack Player. It’s a handy tool created by Expo to embed and run React Native projects and share how they render in platforms like Android and iOS.
                        The code is live and editable, so you can play directly with it in your browser. Go ahead and try changing the "Try editing me!" text above to "Hello, world!"</Text>
                      
@@ -51,6 +52,7 @@ export const Guides = (props) => {
                         <Text style={{ color:'#61dafb', fontSize: 20}}>{"Learn Basics >"}</Text>
                       </TouchableHighlight>
                 </ScrollView>
+                
                 
             </View>
         

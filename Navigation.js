@@ -8,7 +8,6 @@ import { Components } from "./Navigation/Components/Home";
 import { Api } from "./Navigation/Api/Home";
 import { Architecture } from "./Navigation/Architecture/Home";
 import { Blog } from "./Navigation/Blog/Home";
-import { Versions } from "./Navigation/Versions/Home";
 import { Github } from "./Navigation/Github/Home";
 
 import { DataProvider } from './Context/Context';
@@ -27,7 +26,7 @@ export  function StackNavigation() {
     return (
      
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Components" component={Components} />
+            <Stack.Screen name="Components1" component={Components} />
           <Stack.Screen name="Comp1" component={Comp1} />
         </Stack.Navigator>
     );
@@ -40,7 +39,7 @@ export  function StackNavigation() {
     return(
         <DataProvider>
            <Drawer.Navigator 
-                initialRouteName="Components"
+                initialRouteName="Home"
                  screenOptions={{
                     headerShown: false
                 }} >
@@ -57,7 +56,7 @@ export  function StackNavigation() {
 
                 <Drawer.Screen name="Blog" component={Blog} />
 
-                <Drawer.Screen name="Versions" component={Versions} />
+                {/* <Drawer.Screen name="Versions" component={Versions} /> */}
 
                 <Drawer.Screen name="Github" component={Github} />
             </Drawer.Navigator>

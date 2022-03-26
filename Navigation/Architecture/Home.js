@@ -1,19 +1,41 @@
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,  ScrollView } from 'react-native';
+import { StyleSheet, Text, View,  ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Navbar } from '../../Navbar';
+import WebView from 'react-native-webview';
 
 export const Architecture = (props) => {
     const { navigation } = props
+    const loading = () => {
+      return(
+        <ActivityIndicator  
+          size="large" 
+          color="#61dafb"
+          style={{flex: 1, justifyContent: 'center'}} 
+        
+        />
+      )
+    }
 
     return(
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <Navbar navigation={navigation}/>
+            {/* <Navbar navigation={navigation}/> */}
+            <TouchableOpacity
+             onPress={()=>navigation.navigate("Home")}
+             style={{borderColor:"black", borderWidth:2, width:100, height:30, backgroundColor:"#61dafb"}}
+            >
+              <Text style={{marginLeft:10, color:"black", fontSize:18, fontWeight:'bold'}}>{`<< Home`}</Text>
+            </TouchableOpacity>
             <View style={{flex:1}}>
-                <ScrollView >
-                  <Text style={{color:"white"}}>This is Architecture Page</Text>
-                </ScrollView>
+
+                  <WebView 
+                    source={{ uri: 'https://reactnative.dev/architecture/overview' }} 
+                    style={{ marginTop: 20 }}
+                    renderLoading={loading}
+                    startInLoadingState={true}
+                  />
+                  
             </View>
         
       </View>
@@ -23,7 +45,7 @@ export const Architecture = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#333333',
+    // backgroundColor: '#333333',
     top:35
   },
 });

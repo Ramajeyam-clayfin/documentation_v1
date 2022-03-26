@@ -9,7 +9,7 @@ import HomeData from './HomeData.json'
 export const Components = (props) => {
     const { navigation } = props
     const {number, setnumber} = useContext(Datas)
-    console.log(navigation.navigate)
+    // console.log(navigation.navigate)
 
     return(
         <View style={styles.container}>
@@ -31,7 +31,7 @@ and APIs`}</Text>
                     <View style={{backgroundColor:'#f2f2f2', margin:25, marginBottom:20}}>
                     <Text style={{fontSize:18, margin:9, marginLeft:20 }}>Most apps will end up using one of these basic components.</Text>
                     { HomeData.map((obj, index)=> (
-                      <TouchableOpacity onPress={()=> { setnumber(obj.id); navigation.navigate("Comp1");}}>
+                      <TouchableOpacity key={index} onPress={()=> { setnumber(obj.id); navigation.navigate("Comp1");}}>
                         <View style={styles.cardstyle}>
                           <View style={styles.innercard1}><Text style={styles.innertext1}>{obj.title}</Text></View>
                           <View style={styles.innercard2}><Text style={styles.innertext2}>{obj.desc}</Text></View>

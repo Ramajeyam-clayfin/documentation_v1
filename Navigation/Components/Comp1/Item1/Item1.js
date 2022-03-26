@@ -3,6 +3,8 @@ import React,{useContext} from "react"
 import { View, Text, StyleSheet } from "react-native"
 import Data from './Item1data.json'
 import { Datas } from "../../../../Context/Context"
+import WebView from "react-native-webview"
+
 export const Item1 = () => {
     const { number} = useContext(Datas)
     const temp = Data.filter(obj => obj.id === number )
@@ -11,12 +13,13 @@ export const Item1 = () => {
       
       <View style={styles.container1}>
         {temp.map((obj, index) => (
-            <>
-                <Text key={index} style={{color:"#61dafb", fontSize:30, marginBottom:10}}>{obj.name}</Text>
+            <React.Fragment key={index} >
+                <Text style={{color:"#61dafb", fontSize:30, marginBottom:10}}>{obj.name}</Text>
                 <View style={styles.container2}>
+                 
                     <Text style={{color:"black", fontSize:20,}}>{obj.content}</Text>
                 </View>
-            </>
+            </React.Fragment>
           ))}
         
          
