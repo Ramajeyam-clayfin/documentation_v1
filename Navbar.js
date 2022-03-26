@@ -3,10 +3,20 @@ import { StyleSheet, Text, View, Image,  } from 'react-native';
 import { Ionicons, } from "@expo/vector-icons";
 import React from 'react';
 import { Datas } from './Context/Context';
+import { auth } from './firebase';
 
 
 export const Navbar = ({navigation}) => {
   const { setLogin} = React.useContext(Datas)
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.navigate("Login")
+      })
+      .catch(error => alert(error.message))
+  }
 
     return(
         <View style={styles.container}>
@@ -31,7 +41,7 @@ export const Navbar = ({navigation}) => {
                   name="log-out-outline"
                   size={30}
                   color="white"
-                  onPress={() => {setLogin(false) ; navigation.navigate("Home") }}
+                  onPress={() => handleSignOut()}
               />
           </View>
             

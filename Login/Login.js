@@ -3,19 +3,61 @@ import { StatusBar } from 'expo-status-bar';
 import React,{useState, useEffect } from 'react'
 import { Validation } from "./Validation"
 import { Datas } from "../Context/Context";
+import { auth } from "../firebase";
+import { useNavigation } from "@react-navigation/native";
+import Register from "./Register";
 
 export const Login = () => {
     const { setemailerror,setpasserror, emailerror, passerror, setLogin} = React.useContext(Datas)
 
+    const navigation = useNavigation()
+    // console.log("navigation",navigation)
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const loginhandler = () => {
-        let result = Validation(email, password);
-        setemailerror(result.errormessageuser)
-        setpasserror(result.errormessagepass)
-        result.errormessageuser.length || result.errormessagepass.length ? setLogin(false) : setLogin(true)
+    const [trigger , setTrigger ] = useState(true)
 
+    useEffect(() => {
+     
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+          navigation.navigate("Home")
+        }
+      })
+  
+      return unsubscribe
+    }, [trigger])
+
+    // const loginhandler = () => {
+    //     let result = Validation(email, password);
+    //     setemailerror(result.errormessageuser)
+    //     setpasserror(result.errormessagepass)
+    //     handleLogin()
+    //     result.errormessageuser.length || result.errormessagepass.length ? setLogin(false) : setLogin(true)
+
+    // }
+    
+    const handleLogin = () => {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then(userCredentials => {
+          const user = userCredentials.user;
+          console.log('Logged in with:', user.email);
+          setEmail("")
+          setPassword("")
+          setpasserror("") 
+          setTrigger(!trigger)
+        })
+        .catch(error => {
+          // let a = (error.message).slice(10);
+          let b = (error.message).split("/");
+          let c = b[1].slice(0, -2)
+          setpasserror(c)  
+          console.log(c)
+        })
     }
+
+    
 
     return(
         <View style={styles.container}>
@@ -28,6 +70,7 @@ export const Login = () => {
               <TextInput
                 style={styles.TextInput}
                 placeholder="Email"
+                value={email}
                 placeholderTextColor="#20232a"
                 onChangeText={(email) => setEmail(email)}
               />
@@ -42,6 +85,7 @@ export const Login = () => {
                 <TextInput
                 style={styles.TextInput}
                 placeholder="Password"
+                value={password}
                 placeholderTextColor="#20232a"
                 secureTextEntry={true}
                 onChangeText={(password) => setPassword(password)}
@@ -56,8 +100,11 @@ export const Login = () => {
                 <Text style={styles.forgot_button}>Forgot Password?</Text>
             </TouchableOpacity>
         
-            <TouchableOpacity style={styles.loginBtn} onPress={()=>loginhandler()}>
+            <TouchableOpacity style={styles.loginBtn} onPress={()=>handleLogin()}>
                 <Text style={styles.loginText}>LOGIN</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.regisBtn} onPress={()=>navigation.navigate("Register")}>
+                <Text style={[styles.loginText,{color:"white"}]}>SIGNUP</Text>
             </TouchableOpacity>
         </View>
     )
@@ -110,6 +157,21 @@ const styles = StyleSheet.create({
       marginBottom: 30,
       color:"white",
       fontSize:23
+    },
+    regisBtn: {
+      width: "80%",
+    //   borderRadius: 25,
+      height: 50,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 40,
+      // backgroundColor: "white",
+      borderColor:"#61dafb",
+      borderWidth:4
+    },
+    loginText:{
+      fontSize:20,
+      fontWeight:"bold"
     }
   });
 

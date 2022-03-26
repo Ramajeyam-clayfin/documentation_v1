@@ -1,48 +1,51 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableHighlight,   } from 'react-native';
 import { Navbar } from './Navbar';
-import { Login } from './Login/Login';
-import React from 'react'
+import React, {useEffect, useContext} from 'react'
 import { Datas } from './Context/Context';
-// import Header from './Images/header_logo.svg';
+import { auth } from './firebase';
+import { useSelector } from 'react-redux';
 
 
 export const Home = (props) => {
     const { navigation } = props
-    const {  login} = React.useContext(Datas)
+    const {  login} = useContext(Datas)
+    // console.log(auth.currentUser.uid)
+    const userData = useSelector((state) => state?.userData)
+    // const A = userData.filter(obj => obj.uid === auth.currentUser.uid)
+    console.log(userData)
+
+    useEffect(()=>{
+      
+    },[])
 
     return(
-        <View style={[styles.container,{ top: login ? 35 : 0}]}>
-            {login ? 
-            <>
-            
-              <StatusBar style="auto" />
-              <Navbar navigation={navigation}/>
-              <View style={{flex:1, justifyContent: "center", marginBottom: 75  }}>
-                      <Image style={{height:250, width: Dimensions.width, marginBottom: 25 }} resizeMode="cover" source={require('./Images/image1.png')}/>
-                      <Text style={{color:"white", fontSize:30, marginLeft: 20}}>Learn once, </Text>
-                      <Text style={{color:"white", fontSize:30, marginLeft: 20}}>write anywhere.</Text>
-                      {/* <Header />  */}
-                      <TouchableHighlight 
-                        style={styles.start_btn}
-                        underlayColor="#f6affb"
-                        onPress={()=>navigation.navigate("Guides")}
-                        >
-                        <Text>GET STARTED</Text>
-                      </TouchableHighlight>
-                      <TouchableHighlight 
-                        style={styles.learn_btn}
-                        // underlayColor="#ffff"
-                        onPress={()=>navigation.navigate("Components")}
-                        >
-                        <Text style={{ color:'#61dafb', fontSize: 20}}>{"Learn Basics >"}</Text>
-                      </TouchableHighlight>
-              </View> 
-              
-            </> : 
-              <Login/>
-             }
+      <View style={[styles.container,{ top: login ? 35 : 0}]}>
+      
+        <StatusBar style="auto" />
+        <Navbar navigation={navigation}/>
+        <View style={{flex:1, justifyContent: "center", marginBottom: 75  }}>
+                <Image style={{height:250, width: Dimensions.width, marginBottom: 25 }} resizeMode="cover" source={require('./Images/image1.png')}/>
+                <Text style={{color:"white", fontSize:30, marginLeft: 20}}>Learn once, </Text>
+                <Text style={{color:"white", fontSize:30, marginLeft: 20}}>write anywhere.</Text>
+                {/* <Header />  */}
+                <TouchableHighlight 
+                  style={styles.start_btn}
+                  underlayColor="#f6affb"
+                  onPress={()=>navigation.navigate("Guides")}
+                  >
+                  <Text>GET STARTED</Text>
+                </TouchableHighlight>
+                <TouchableHighlight 
+                  style={styles.learn_btn}
+                  // underlayColor="#ffff"
+                  onPress={()=>navigation.navigate("Components")}
+                  >
+                  <Text style={{ color:'#61dafb', fontSize: 20}}>{"Learn Basics >"}</Text>
+                </TouchableHighlight>
+        </View> 
       </View>
+     
     )
 }
 

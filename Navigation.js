@@ -2,6 +2,7 @@ import React from "react"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { Login } from "./Login/Login";
 import { Home }  from "./Home"
 import { Guides } from "./Navigation/Guides/Home";
 import { Components } from "./Navigation/Components/Home";
@@ -11,6 +12,11 @@ import { Blog } from "./Navigation/Blog/Home";
 import { Github } from "./Navigation/Github/Home";
 
 import { DataProvider } from './Context/Context';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import Reducer1 from './Redux/Reducer1';
+
+const store = createStore( Reducer1, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ); 
 
 
 const Drawer = createDrawerNavigator();
@@ -19,6 +25,7 @@ const Stack = createNativeStackNavigator();
 
 
 import { Comp1 } from "./Navigation/Components/Comp1/Home";
+import Register from "./Login/Register";
 
 
 
@@ -37,12 +44,18 @@ export  function StackNavigation() {
  function Navigation () {
 
     return(
+        
         <DataProvider>
+            <Provider store={store}>
            <Drawer.Navigator 
-                initialRouteName="Home"
+                initialRouteName="Login"
                  screenOptions={{
                     headerShown: false
                 }} >
+                    
+                <Drawer.Screen  name="Login"  component={Login} />
+
+                <Drawer.Screen  name="Register"  component={Register} />
 
                 <Drawer.Screen  name="Home"  component={Home} />
 
@@ -60,6 +73,7 @@ export  function StackNavigation() {
 
                 <Drawer.Screen name="Github" component={Github} />
             </Drawer.Navigator>
+            </Provider>
         </DataProvider>
     )
 }
