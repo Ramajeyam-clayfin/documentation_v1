@@ -12,16 +12,19 @@ export const Home = (props) => {
     const { navigation } = props
     const {  login, trigger } = useContext(Datas)
     // console.log(auth.currentUser.uid)
-    const temp = auth.currentUser
-    console.log("temp:",temp )
-    const useruid = auth.currentUser.uid
-    const email = auth.currentUser.email
+    // const temp = auth.currentUser
+    // console.log("temp:",temp )
+    
+    // console.log("useruid:",useruid )
+    // console.log("email:",email )
     const userData = useSelector((state) => state?.userData)
     const dispatch = useDispatch()
     // const A = userData.filter(obj => obj.uid === auth.currentUser.uid)
     console.log("userData :", userData)
     // dispatch(add_user(useruid))
     useEffect(()=>{
+      const useruid = auth.currentUser.uid
+      const email = auth.currentUser.email
       dispatch(updateuser(useruid, email))
     },[])
     return(

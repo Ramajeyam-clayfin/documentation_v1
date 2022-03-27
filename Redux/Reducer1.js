@@ -36,25 +36,32 @@ const Reducer1 = (state = initialState, action) => {
         }
         case actions.UPDATE_USER : {
 
-            console.log("UPDATE_USER_EMAIL :", action.email)
-            console.log("UPDATE_USER_UID :", action.uid)
-            let send 
-            let temp = state.userData.map(obj => {
-               if( obj.uid === action.uid ) {
-                   obj = {
-                       ...obj,
-                       email : action.email
-                   }
-                   send = obj
-                   return obj
-               }
-               return obj
-            })
-            console.log(temp)
+           
+            if(action.uid !== undefined ){
+                console.log("UPDATE_USER_EMAIL :", action.email)
+                console.log("UPDATE_USER_UID :", action.uid)
+                let send 
+                let temp = state.userData.map(obj => {
+                if( obj.uid === action.uid ) {
+                    obj = {
+                        ...obj,
+                        email : action.email
+                    }
+                    send = obj
+                    return obj
+                }
+                return obj
+                })
+                console.log("temp :",temp)
+                console.log("send :",send)
+                return {
+                    userData:temp
+                }
 
-            // return {
-            //     userData:temp
-            // }
+            }
+            else return state
+            
+            
         }
 
         
