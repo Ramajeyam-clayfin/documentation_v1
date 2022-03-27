@@ -1,22 +1,23 @@
 import {actions} from './ActionTypes'
 
-export const add_user = (todoItem) => {
+export const add_user = (useruid) => {
     return {
-        type: actions.ADD_TODO_ITEM,
-        value: todoItem
+        type: actions.ADD_USER,
+        value: useruid
     }
 }
 
-export const removeitem = (todoItemId) => {
+export const initialize = (users) => {
     return {
-        type: actions.REMOVE_TODO_ITEM,
-        value: todoItemId
+        type: actions.INITIALIZE,
+        value: users
     }
 }
 
-export const completed = (todoItemId) => {
+export const updateuser = (uid, email) => {
     return {
-        type: actions.TOGGLE_COMPLETED,
-        value: todoItemId
+        type: actions.UPDATE_USER,
+        uid: uid,
+        email : email
     }
 }

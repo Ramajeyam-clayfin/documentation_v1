@@ -3,26 +3,48 @@ import { StatusBar } from 'expo-status-bar';
 import React,{useState, useEffect } from 'react'
 import { Validation } from "./Validation"
 import { Datas } from "../Context/Context";
-import { auth } from "../firebase";
+import { auth, getData } from "../firebase";
 import { useNavigation } from "@react-navigation/native";
 import Register from "./Register";
+import { useDispatch } from "react-redux";
+import { add_user, initialize } from "../Redux/Actions";
 
 export const Login = () => {
-    const { setemailerror,setpasserror, emailerror, passerror, setLogin} = React.useContext(Datas)
+    const { setemailerror,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
 
     const navigation = useNavigation()
+    const dispatch = useDispatch()
     // console.log("navigation",navigation)
-
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [trigger , setTrigger ] = useState(true)
+    const [user , setUser ] = useState([])
+
+    const getusers = (users) => {
+      console.log("initail users:", users)
+      setUser(users)
+    }
+
+    // ()=>getData(getusers)
+    
+    useEffect(()=>{
+      getData(getusers)
+      
+    },[])
+    useEffect(()=>{
+      dispatch(initialize(user))
+      console.log("user :", user)
+    },[user])
 
     useEffect(() => {
      
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
+          const useruid = auth.currentUser.uid
+          dispatch(add_user(useruid))
           navigation.navigate("Home")
         }
+        else navigation.navigate("Login")
       })
   
       return unsubscribe

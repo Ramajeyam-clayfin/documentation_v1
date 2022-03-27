@@ -4,21 +4,26 @@ import { Navbar } from './Navbar';
 import React, {useEffect, useContext} from 'react'
 import { Datas } from './Context/Context';
 import { auth } from './firebase';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { add_user, updateuser } from './Redux/Actions';
 
 
 export const Home = (props) => {
     const { navigation } = props
-    const {  login} = useContext(Datas)
+    const {  login, trigger } = useContext(Datas)
     // console.log(auth.currentUser.uid)
+    const temp = auth.currentUser
+    console.log("temp:",temp )
+    const useruid = auth.currentUser.uid
+    const email = auth.currentUser.email
     const userData = useSelector((state) => state?.userData)
+    const dispatch = useDispatch()
     // const A = userData.filter(obj => obj.uid === auth.currentUser.uid)
-    console.log(userData)
-
+    console.log("userData :", userData)
+    // dispatch(add_user(useruid))
     useEffect(()=>{
-      
+      dispatch(updateuser(useruid, email))
     },[])
-
     return(
       <View style={[styles.container,{ top: login ? 35 : 0}]}>
       
