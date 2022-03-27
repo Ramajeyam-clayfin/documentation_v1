@@ -17,7 +17,7 @@ const Reducer1 = (state = initialState, action) => {
         }
         case actions.ADD_USER : {
 
-            if(action.useruid !== undefined && action.name !== undefined && action.email !== undefined ){
+            if(action.useruid !== undefined && action.name !== "" && action.email !== "" ){
                 console.log("ADD_USER :", action.email)
                 console.log("new user")
                 const user =  {
