@@ -5,9 +5,8 @@ import { Validation } from "./Validation"
 import { Datas } from "../Context/Context";
 import { auth, getData } from "../firebase";
 import { useNavigation } from "@react-navigation/native";
-import Register from "./Register";
 import { useDispatch } from "react-redux";
-import { add_user, initialize } from "../Redux/Actions";
+import { initialize } from "../Redux/Actions";
 
 export const Login = () => {
     const { setemailerror,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
@@ -20,28 +19,19 @@ export const Login = () => {
     const [password, setPassword] = useState("");
     const [user , setUser ] = useState([])
 
-    const getusers = (users) => {
-      console.log("initail users:", users)
-      setUser(users)
-    }
+    const getusers = (users) => setUser(users)
 
-    // ()=>getData(getusers)
-    
     useEffect(()=>{
       getData(getusers)
       
     },[])
-    useEffect(()=>{
-      dispatch(initialize(user))
-      console.log("user :", user)
-    },[user])
+
+    useEffect(()=>{ dispatch(initialize(user)) },[user])
 
     useEffect(() => {
      
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
-          const useruid = auth.currentUser.uid
-          dispatch(add_user(useruid))
           navigation.navigate("Home")
         }
         else navigation.navigate("Login")
@@ -64,18 +54,23 @@ export const Login = () => {
         .signInWithEmailAndPassword(email, password)
         .then(userCredentials => {
           const user = userCredentials.user;
-          console.log('Logged in with:', user.email);
+          console.log('Logged in with:', user);
           setEmail("")
           setPassword("")
           setpasserror("") 
           setTrigger(!trigger)
         })
         .catch(error => {
-          // let a = (error.message).slice(10);
-          let b = (error.message).split("/");
-          let c = b[1].slice(0, -2)
-          setpasserror(c)  
-          console.log(c)
+          if (error.code === 'auth/invalid-email') {
+            setpasserror('Invalid-email !')
+          }
+      
+          if (error.code === 'auth/user-not-found') {
+            setpasserror('user-not-found ! Try Signup')
+          }
+          if (error.code === 'auth/wrong-password') {
+            setpasserror('wrong-password')
+          }
         })
     }
 

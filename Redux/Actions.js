@@ -1,9 +1,11 @@
 import {actions} from './ActionTypes'
 
-export const add_user = (useruid) => {
+export const add_user = (useruid, name, email) => {
     return {
         type: actions.ADD_USER,
-        value: useruid
+        useruid : useruid,
+        name : name,
+        email : email
     }
 }
 

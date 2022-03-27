@@ -1,6 +1,6 @@
 
 import  {actions} from './ActionTypes'
-import { adduser } from '../firebase';
+import { adduser, updateuser } from '../firebase';
 
 const initialState = {
     userData: []
@@ -16,23 +16,29 @@ const Reducer1 = (state = initialState, action) => {
             return { userData : action.value }
         }
         case actions.ADD_USER : {
-            console.log("ADD_USER :", action.value)
-            let uid = state.userData.filter(obj => obj.uid === action.value)
-            if(!uid.length){
+
+            if(action.useruid !== undefined && action.name !== undefined && action.email !== undefined ){
+                console.log("ADD_USER :", action.email)
                 console.log("new user")
                 const user =  {
-                        uid: action.value
+                        uid: action.useruid,
+                        name : action.name,
+                        email : action.email
                     }
                 adduser(user)
 
                 return { 
-                    userData : [...state.userData, {
-                    uid: action.value
-                    }
-                ]
+                    userData : [
+                        ...state.userData, 
+                        {
+                            uid: action.useruid,
+                            name : action.name,
+                            email : action.email
+                        }
+                    ]
+                }
             }
-                
-            }
+            else return state
         }
         case actions.UPDATE_USER : {
 
@@ -54,6 +60,7 @@ const Reducer1 = (state = initialState, action) => {
                 })
                 console.log("temp :",temp)
                 console.log("send :",send)
+                updateuser(send)
                 return {
                     userData:temp
                 }

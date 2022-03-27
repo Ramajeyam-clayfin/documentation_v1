@@ -1,34 +1,68 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import React,{useState, useEffect} from 'react'
-import { auth } from '../firebase';
+import { Datas } from "../Context/Context";
+import { useDispatch } from "react-redux";
+import { auth, getData } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
+import { add_user, initialize } from "../Redux/Actions";
 
 const Register = () => {
+
+  const { setemailerror,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
+
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const [user , setUser ] = useState([])
 
     const navigation = useNavigation();
+    const dispatch = useDispatch()
+
+    const getusers = (users) => setUser(users)
+
+    useEffect(()=>{ dispatch(initialize(user)) },[user])
 
     useEffect(() => {
+        
         const unsubscribe = auth.onAuthStateChanged(user => {
           if (user) {
             navigation.navigate("Home")
+            const useruid = auth.currentUser.uid
+            dispatch(add_user(useruid, name, email))
+            getData(getusers)
+            
           }
+          else navigation.navigate("Login")
         })
     
         return unsubscribe
+        
       }, [])
 
     const handleSignUp = () => {
         auth
-          .createUserWithEmailAndPassword(email, password, name)
+          .createUserWithEmailAndPassword(email, password )
           .then(userCredentials => {
             const user = userCredentials.user;
+            setEmail("")
+            setPassword("")
+            setpasserror("") 
             console.log('Registered with:', user.email);
           })
-          .catch(error => alert(error.message))
+          .catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+              setpasserror('That email address is already in use!')
+            }
+        
+            if (error.code === 'auth/invalid-email') {
+              setpasserror('That email address is invalid!')
+            }
+            if (error.code === 'auth/weak-password') {
+              setpasserror('weak-password')
+            }
+
+          })
       }
 
   return (
@@ -65,6 +99,9 @@ const Register = () => {
           />
           
         </View>
+        {passerror.length ?
+                   <Text style={{color:"red", marginBottom: 10,}}>{passerror}</Text> :  null
+                }
         <TouchableOpacity style={styles.loginBtn} onPress={()=>handleSignUp()}>
                 <Text style={styles.loginText}>SIGNUP</Text>
             </TouchableOpacity>

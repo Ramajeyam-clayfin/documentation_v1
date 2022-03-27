@@ -38,14 +38,24 @@ export { db, auth };
 
 export function adduser (user) {
   db.collection("userData")
-  .add({
-    uid: user.uid
+  .doc(user.uid)
+  .set({
+    uid: user.uid,
+    name : user.name,
+    email : user.email
   })
   .catch(error => console.log("error :", error) )
 }
 
+
+
 export function updateuser (users) {
-  
+  db.collection("userData")
+  .doc(users.uid)
+  .update({
+    uid: users.uid,
+    email : users.email
+  })
 }
 
 
