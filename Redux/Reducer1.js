@@ -1,6 +1,6 @@
 
 import  {actions} from './ActionTypes'
-import { adduser, updateuser } from '../firebase';
+import { adduser, createdata, updateuser1 } from '../firebase';
 
 const initialState = {
     userData: []
@@ -17,7 +17,10 @@ const Reducer1 = (state = initialState, action) => {
         }
         case actions.ADD_USER : {
 
-            if(action.useruid !== undefined && action.name !== "" && action.email !== "" ){
+            const user = state.userData.filter(obj => obj.uid === action.userid)
+
+            if( user.length ){
+               
                 console.log("ADD_USER :", action.email)
                 console.log("new user")
                 const user =  {
@@ -38,20 +41,18 @@ const Reducer1 = (state = initialState, action) => {
                     ]
                 }
             }
-            else return state
+            else  return state
         }
-        case actions.UPDATE_USER : {
-
-           
-            if(action.uid !== undefined ){
-                console.log("UPDATE_USER_EMAIL :", action.email)
-                console.log("UPDATE_USER_UID :", action.uid)
+        
+        case actions.CREATE_DATA : {
+            if(action.userid !== undefined ){
+                console.log("CREATE_DATA :", action.userid)
                 let send 
                 let temp = state.userData.map(obj => {
-                if( obj.uid === action.uid ) {
+                if( obj.uid === action.userid ) {
                     obj = {
                         ...obj,
-                        email : action.email
+                        Datas : {}
                     }
                     send = obj
                     return obj
@@ -60,15 +61,42 @@ const Reducer1 = (state = initialState, action) => {
                 })
                 console.log("temp :",temp)
                 console.log("send :",send)
-                updateuser(send)
+                createdata(send)
                 return {
                     userData:temp
                 }
 
             }
             else return state
-            
-            
+        }
+
+        case actions.UPDATE_USER : {
+
+            let temp = state.userData.map(obj => {
+                if( obj.uid === action.userid ) {
+                    console.log("action.name :" ,action.name)
+                    if( action.name === "Intro"){
+                        obj = {
+                            ...obj,
+                            Datas : {
+                                Intro : action.precent 
+                            }
+                        }
+                    }
+                   
+                    send = obj
+                    return obj
+                }
+                return obj
+                })
+                console.log("temp :",temp)
+                console.log("send :",send)
+                updateuser1(send, action.name)
+
+                return {
+                    userData:temp
+                }
+
         }
 
         

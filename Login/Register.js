@@ -1,3 +1,5 @@
+
+
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import React,{useState, useEffect} from 'react'
@@ -9,7 +11,7 @@ import { add_user, initialize } from "../Redux/Actions";
 
 const Register = () => {
 
-  const { setemailerror,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
+  const { setUserid ,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -28,12 +30,13 @@ const Register = () => {
         const unsubscribe = auth.onAuthStateChanged(user => {
           if (user) {
             navigation.navigate("Home")
-            const useruid = auth.currentUser.uid
-            dispatch(add_user(useruid, name, email))
+            setEmail("")
+            setPassword("")
             getData(getusers)
             
+            
           }
-          else navigation.navigate("Login")
+          else navigation.navigate("Register")
         })
     
         return unsubscribe
@@ -45,8 +48,10 @@ const Register = () => {
           .createUserWithEmailAndPassword(email, password )
           .then(userCredentials => {
             const user = userCredentials.user;
-            setEmail("")
-            setPassword("")
+            const useruid = auth.currentUser.uid
+            dispatch(add_user(useruid, name, email))
+            setUserid(useruid)
+            setTrigger(!trigger)
             setpasserror("") 
             console.log('Registered with:', user.email);
           })

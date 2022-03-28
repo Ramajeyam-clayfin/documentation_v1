@@ -5,20 +5,26 @@ import React, {useEffect, useContext} from 'react'
 import { Datas } from './Context/Context';
 import { auth } from './firebase';
 import { useSelector, useDispatch } from 'react-redux';
-import { add_user, updateuser } from './Redux/Actions';
+import { createData } from './Redux/Actions';
 
 
 export const Home = (props) => {
     const { navigation } = props
-    const {  login, trigger } = useContext(Datas)
+    const {  login, trigger, userid } = useContext(Datas)
     const userData = useSelector((state) => state?.userData)
     const dispatch = useDispatch()
     console.log("userData :", userData)
     useEffect(()=>{
-      const useruid = auth.currentUser.uid
-      const email = auth.currentUser.email
-      // dispatch(updateuser(useruid, email))
-    },[])
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+          dispatch(createData(userid))
+        }
+      })
+  
+      return unsubscribe
+      
+    },[trigger])
+    
     return(
       <View style={[styles.container,{ top: login ? 35 : 0}]}>
       

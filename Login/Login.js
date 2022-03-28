@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { initialize } from "../Redux/Actions";
 
 export const Login = () => {
-    const { setemailerror,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
+    const { setUserid ,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
@@ -54,7 +54,9 @@ export const Login = () => {
         .signInWithEmailAndPassword(email, password)
         .then(userCredentials => {
           const user = userCredentials.user;
-          console.log('Logged in with:', user);
+          console.log('Logged in with:', user.email);
+          const useruid = auth.currentUser.uid
+          setUserid(useruid)
           setEmail("")
           setPassword("")
           setpasserror("") 

@@ -3,18 +3,42 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,  ScrollView, Dimensions, Image, TouchableHighlight } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { Navbar } from '../../Navbar';
+import { Datas } from '../../Context/Context';
+import { useDispatch } from 'react-redux'
+import { updateuser } from '../../Redux/Actions';
+import { useContext, useEffect, useState } from 'react';
 
 export const Guides = (props) => {
     const { navigation } = props
-    // console.log( Dimensions.get('screen').height)
+    const { userid } = useContext(Datas)
+    const [intro, setIntro] = useState(10)
     const view1height = ( Math.round(Dimensions.get('screen').height)/3)
     const view1width = ( Math.round(Dimensions.get('screen').width)-25)
+    const dispatch = useDispatch();
+    // console.log("userData :", userData)
+    const name = "Intro";
+    useEffect(()=>{
+       dispatch(updateuser(userid, intro, name))
+    },[])
+    const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+      const paddingToBottom = 20;
+      return layoutMeasurement.height + contentOffset.y >=
+        contentSize.height - paddingToBottom;
+    };
     return(
         <View style={styles.container}>
             <StatusBar style="auto" />
             <Navbar navigation={navigation}/>
             <View style={{flex:1}}>
-                <ScrollView >
+                <ScrollView 
+
+                  onScroll={({nativeEvent})=>{
+                    if(isCloseToBottom(nativeEvent)){
+                      setIntro(100, dispatch(updateuser(userid, intro, name)) );
+                     
+                    }
+                    }}
+                >
                   <Text style={{ color:"black", fontSize:50, fontWeight:"bold", marginLeft:15, marginBottom:20, marginTop:20, }}>Introduction</Text>
 
                   <View style={{ height: view1height , width:view1width, backgroundColor:"#54c7ec", alignSelf:"center", flexDirection:"row"}}>

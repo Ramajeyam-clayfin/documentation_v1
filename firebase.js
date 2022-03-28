@@ -34,8 +34,6 @@ const auth = firebase.auth()
 export { db, auth };
 
 
-
-
 export function adduser (user) {
   db.collection("userData")
   .doc(user.uid)
@@ -44,18 +42,37 @@ export function adduser (user) {
     name : user.name,
     email : user.email
   })
+  .then(()=>console.log("user is added"))
   .catch(error => console.log("error :", error) )
 }
 
 
 
-export function updateuser (users) {
+export function createdata (users) {
   db.collection("userData")
   .doc(users.uid)
   .update({
-    uid: users.uid,
-    email : users.email
+    Datas : {}
   })
+  .then(()=>console.log("Data is created"))
+}
+
+export function updateuser1 (users, name) {
+
+  if(name === "Intro"){
+    db.collection("userData")
+    .doc(users.uid)
+    .set({
+      email: users.email,
+      name: users.name,
+      uid: users.uid,
+      Datas : {
+        Intro : users.Datas.Intro
+      }
+    })
+    .then(()=>console.log("Data is Updated"))
+  }
+  
 }
 
 

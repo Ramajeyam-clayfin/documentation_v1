@@ -16,10 +16,22 @@ export const initialize = (users) => {
     }
 }
 
-export const updateuser = (uid, email) => {
-    return {
-        type: actions.UPDATE_USER,
-        uid: uid,
-        email : email
+export const updateuser = (userid, precent, name) => {
+
+        return {
+            type: actions.UPDATE_USER,
+            userid: userid,
+            name : name,
+            precent : precent
+        }
+}
+
+export const createData = (userid) => {
+
+    return{
+        type: actions.CREATE_DATA,
+        userid:userid
+        
     }
 }
+
