@@ -72,6 +72,21 @@ export function updateuser1 (users, name) {
     })
     .then(()=>console.log("Data is Updated"))
   }
+  else if(name === "Overall"){
+    db.collection("userData")
+    .doc(users.uid)
+    .set({
+      email: users.email,
+      name: users.name,
+      uid: users.uid,
+      Datas : {
+        Intro : users.Datas.Intro,
+        Overall : users.Datas.Overall
+      }
+    })
+    .then(()=>console.log("Data is Updated"))
+  }
+  
   
 }
 

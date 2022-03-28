@@ -50,12 +50,16 @@ const Reducer1 = (state = initialState, action) => {
                 let send 
                 let temp = state.userData.map(obj => {
                 if( obj.uid === action.userid ) {
-                    obj = {
-                        ...obj,
-                        Datas : {}
+                    if(!obj.Datas){
+                        obj = {
+                            ...obj,
+                            Datas : {}
+                        }
+                        send = obj
+                        return obj
                     }
-                    send = obj
-                    return obj
+                    else return obj
+                   
                 }
                 return obj
                 })
@@ -83,10 +87,21 @@ const Reducer1 = (state = initialState, action) => {
                             }
                         }
                     }
+                    else if( action.name === "Overall" ){
+                        obj = {
+                            ...obj,
+                            Datas : {
+                                Overall : action.precent,
+                                ...obj.Datas, 
+
+                            }
+                        }
+                    }
                    
                     send = obj
                     return obj
                 }
+                
                 return obj
                 })
                 console.log("temp :",temp)
