@@ -12,13 +12,13 @@ export const Guides = (props) => {
     const { navigation } = props
     const { userid } = useContext(Datas)
     const [intro, setIntro] = useState(10)
-    const overall = 10;
+    const overall = 0;
     const view1height = ( Math.round(Dimensions.get('screen').height)/3)
     const view1width = ( Math.round(Dimensions.get('screen').width)-25)
     const dispatch = useDispatch();
     // console.log("userData :", userData)
     const name = "Intro";
-    const name2 = "Overall"
+    const name2 = "Overall_Basics"
     useEffect(()=>{
        dispatch(updateuser(userid, intro, name))
     },[])

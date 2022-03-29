@@ -1,13 +1,25 @@
 
-import React,{useContext} from "react"
+import React,{useContext, useEffect} from "react"
 import { View, Text, StyleSheet } from "react-native"
 import Data from './Item1data.json'
 import { Datas } from "../../../../Context/Context"
 import WebView from "react-native-webview"
+import { updateuser } from "../../../../Redux/Actions"
+import { useDispatch } from "react-redux"
 
 export const Item1 = () => {
-    const { number} = useContext(Datas)
+    const { number, userid} = useContext(Datas)
+    const dispatch = useDispatch()
     const temp = Data.filter(obj => obj.id === number )
+    const name1 = temp.map(obj => obj.name)
+    const percent = 30
+    const name = name1.toString()
+    // console.log("Name:", name)
+
+    useEffect(()=>{
+      console.log("Dispatching Action : {1}")
+       dispatch(updateuser(userid, percent, name))
+    },[])
 
     return(
       

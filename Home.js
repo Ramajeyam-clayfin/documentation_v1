@@ -13,7 +13,7 @@ export const Home = (props) => {
     const {  login, trigger, userid } = useContext(Datas)
     const userData = useSelector((state) => state?.userData)
     const dispatch = useDispatch()
-    console.log("userData :", userData)
+    // console.log("userData :", userData)
     useEffect(()=>{
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
@@ -41,12 +41,12 @@ export const Home = (props) => {
                   >
                   <Text>GET STARTED</Text>
                 </TouchableHighlight>
-                <TouchableHighlight 
+                {/* <TouchableHighlight 
                   style={styles.learn_btn}
                   onPress={()=>navigation.navigate("Components")}
                   >
                   <Text style={{ color:'#61dafb', fontSize: 20}}>{"Learn Basics >"}</Text>
-                </TouchableHighlight>
+                </TouchableHighlight> */}
         </View> 
       </View>
      

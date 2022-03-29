@@ -1,15 +1,25 @@
 
-import React, {useContext} from "react"
+import React, {useContext, useEffect} from "react"
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,  ScrollView, TouchableOpacity } from 'react-native';
 import { Navbar } from '../../Navbar';
 import { Datas } from "../../Context/Context";
 import HomeData from './HomeData.json'
+import { useDispatch } from "react-redux";
+import { updateuser } from "../../Redux/Actions";
 
 export const Components = (props) => {
     const { navigation } = props
-    const {number, setnumber} = useContext(Datas)
+    const {number, setnumber, userid} = useContext(Datas)
+    const completed = 1
+    const name = "Overall_Basics"
     // console.log(navigation.navigate)
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+      console.log("Dispatching Action : {1}")
+       dispatch(updateuser(userid, completed, name))
+    },[])
 
     return(
         <View style={styles.container}>

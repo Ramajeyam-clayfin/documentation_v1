@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { initialize } from "../Redux/Actions";
 
 export const Login = () => {
-    const { setUserid ,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
+    const { userid, setUserid ,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
 
     const navigation = useNavigation()
     const dispatch = useDispatch()
@@ -26,7 +26,7 @@ export const Login = () => {
       
     },[])
 
-    useEffect(()=>{ dispatch(initialize(user)) },[user])
+    useEffect(()=>{ dispatch(initialize(user, userid)) },[user && userid])
 
     useEffect(() => {
      
@@ -34,7 +34,7 @@ export const Login = () => {
         if (user) {
           navigation.navigate("Home")
         }
-        else navigation.navigate("Login")
+        // else navigation.navigate("Login")
       })
   
       return unsubscribe

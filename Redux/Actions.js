@@ -9,10 +9,11 @@ export const add_user = (useruid, name, email) => {
     }
 }
 
-export const initialize = (users) => {
+export const initialize = (users, userid) => {
     return {
         type: actions.INITIALIZE,
-        value: users
+        value: users,
+        userid: userid
     }
 }
 

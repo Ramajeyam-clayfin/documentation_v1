@@ -1,5 +1,8 @@
-import React, {useContext} from "react"
+import React, {useContext, useEffect} from "react"
 import { Datas } from "../../../../Context/Context"
+import { useDispatch } from "react-redux";
+import { updateuser } from "../../../../Redux/Actions";
+import Data1 from '../Item1/Item1data.json'
 
 import { View, Text, StyleSheet, Pressable, Linking, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native"
 import Data  from "./Item3data.json";
@@ -7,8 +10,20 @@ import WebView from "react-native-webview";
 
 
 export const Item3 = () => {
-  const { number} = useContext(Datas)
+  const { number, userid} = useContext(Datas)
   const temp = Data.filter(obj => obj.id === number )
+  const dispatch = useDispatch()
+
+  const temp1 = Data1.filter(obj => obj.id === number )
+  const name1 = temp1.map(obj => obj.name)
+  const percent = 90
+  const name = name1.toString()
+  
+
+ useEffect(()=>{
+  console.log("Dispatching Action : {1}")
+   dispatch(updateuser(userid, percent, name))
+},[])
   const loading = () => {
     return(
       <ActivityIndicator  

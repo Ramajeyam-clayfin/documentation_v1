@@ -57,7 +57,9 @@ export function createdata (users) {
   .then(()=>console.log("Data is created"))
 }
 
-export function updateuser1 (users, name) {
+
+
+export function updateuser1 (users, name, newname) {
 
   if(name === "Intro"){
     db.collection("userData")
@@ -67,12 +69,14 @@ export function updateuser1 (users, name) {
       name: users.name,
       uid: users.uid,
       Datas : {
-        Intro : users.Datas.Intro
+        ...users.Datas,
+        Intro : users.Datas.Intro,
+        
       }
     })
     .then(()=>console.log("Data is Updated"))
   }
-  else if(name === "Overall"){
+  else if(name === "Overall_Basics"){
     db.collection("userData")
     .doc(users.uid)
     .set({
@@ -80,13 +84,88 @@ export function updateuser1 (users, name) {
       name: users.name,
       uid: users.uid,
       Datas : {
-        Intro : users.Datas.Intro,
-        Overall : users.Datas.Overall
+        ...users.Datas,
+        Basics : {
+          ...users.Datas.Basics,
+          Total : {
+            Total_Basics : users.Datas.Basics.Total.Total_Basics,
+            completed :  users.Datas.Basics.Total.completed,
+            Overall_Basics : users.Datas.Basics.Total.Overall_Basics,
+            View : false,
+            Text : false,
+            Image : false,
+            TextInput : false,
+            ScrollView : false,
+            StyleSheet : false,
+          },
+          
+        },
+        
+       
       }
     })
     .then(()=>console.log("Data is Updated"))
+  }else {
+
+    const array1 = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
+
+    array1.map (object => {
+      if( object === name){
+        
+        if( newname === "Total"){
+          db.collection("userData")
+            .doc(users.uid)
+            .set({
+              email: users.email,
+              name: users.name,
+              uid: users.uid,
+              Datas : {
+                ...users.Datas,
+                Basics : {
+                  ...users.Datas.Basics,
+                  Total : {
+                    ...users.Datas.Basics.Total,
+                    completed :  users.Datas.Basics.Total.completed,
+                    Overall_Basics : users.Datas.Basics.Total.Overall_Basics,
+                    [object] : true
+                  },
+                  
+                },
+                
+              
+              }
+            })
+            .then(()=>console.log("Data is Updated"))
+          }
+        }
+        else {
+            let value
+            for( let name in users.Datas.Basics){
+              (name === "View") ? (value = users.Datas.Basics[name]) : null
+            }
+            console.log("view :", value);
+
+            db.collection("userData")
+            .doc(users.uid)
+            .set({
+              email: users.email,
+              name: users.name,
+              uid: users.uid,
+              Datas : {
+                ...users.Datas,
+                Basics : {
+                  ...users.Datas.Basics,
+                  [object] : value,
+                  
+                },
+                
+              
+              }
+            })
+            .then(()=>console.log("Data is Updated"))
+          } 
+    })
   }
-  
   
 }
 
