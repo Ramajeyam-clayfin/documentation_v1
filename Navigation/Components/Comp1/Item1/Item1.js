@@ -10,8 +10,8 @@ import { useDispatch } from "react-redux"
 export const Item1 = () => {
     const { number, userid} = useContext(Datas)
     const dispatch = useDispatch()
-    const temp = Data.filter(obj => obj.id === number )
-    const name1 = temp.map(obj => obj.name)
+    const temp = Data.filter(obj => obj.id === number );
+    const name1 = temp.map(obj => obj.name);
     const percent = 30
     const name = name1.toString()
     // console.log("Name:", name)

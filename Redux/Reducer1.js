@@ -1,6 +1,6 @@
 
 import  {actions} from './ActionTypes'
-import { adduser, createdata, updateuser1 } from '../firebase';
+import { adduser, createdata, updateuserintro, updateuserothers, updateuseroverall } from '../firebase';
 
 const initialState = {
     userData: []
@@ -17,6 +17,7 @@ const Reducer1 = (state = initialState, action) => {
             console.log("User Detail : ",temp)
             return { userData : temp }
         }
+
         case actions.ADD_USER : {
 
             const user = state.userData.filter(obj => obj.uid === action.userid)
@@ -47,6 +48,7 @@ const Reducer1 = (state = initialState, action) => {
         }
         
         case actions.CREATE_DATA : {
+
             if(action.userid !== undefined ){
                 console.log("CREATE_DATA :", action.userid)
                 let temp = state.userData.map(obj => {
@@ -63,26 +65,23 @@ const Reducer1 = (state = initialState, action) => {
                     else {
                         return obj
                     }
-                   
                 }
                 return obj
                 })
                 
-               
                 return {
                     userData:temp
                 }
-
             }
             else return state
         }
 
-        case actions.UPDATE_USER : {
+        case actions.UPDATE_USER_INTRO : {
+            console.log("UPDATE_USER_INTRO :")
 
-            let temp = state.userData.map(obj => {
+            let temp = state.userData.map( obj => {
                 if( obj.uid === action.userid ) {
                     console.log("action.name :" ,action.name)
-                    if( action.name === "Intro"){
                         if( obj.Datas?.Intro >= action.precent ){
                             return obj
                         }
@@ -94,11 +93,23 @@ const Reducer1 = (state = initialState, action) => {
                                 }
                             }
                             console.log("send Data :", obj)
-                            updateuser1(obj, action.name)
+                            updateuserintro(obj, action.name)
                         }
-                        
                     }
-                    else if( action.name === "Overall_Basics" ){
+                return obj
+                })
+
+            return {
+                userData:temp
+            }
+
+        }
+        case actions.UPDATE_USER_OVERALL_BASICS : {
+            console.log("UPDATE_USER_OVERALL_BASICS :")
+
+            let temp = state.userData.map(obj => {
+                if( obj.uid === action.userid ) {
+                    console.log("action.name :" ,action.name)
                         if( obj.Datas?.Basics?.Total?.completed >= action.precent ){
                             return obj
                         }
@@ -127,79 +138,97 @@ const Reducer1 = (state = initialState, action) => {
                                 }
                             }
                             console.log("send Data :", obj)
-                            updateuser1(obj, action.name)
+                            updateuseroverall(obj, action.name)
 
                         }
-                    }
-                    else {
-                        const array = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
+                   
+                    return obj
+                }
+                
+                return obj
+                })
 
-                        array.map (name => {
-                            
-                            if( name === action.name){
-                                console.log("obj.Datas?.Basics?.[name] :", obj.Datas?.Basics?.[name])
-                                if( obj.Datas?.Basics?.[name] >= action.precent ){
-                                    return obj
-                                }
-                                else if( obj.Datas?.Basics?.[name] === 90 ){
+            return {
+                userData: temp
+            }
 
-                                    if(!obj.Datas?.Basics?.Total?.[name]){
-                                        const newname = "Total"
-                                        const tot = ((obj.Datas.Basics.Total.completed + 1)  / 26 * 100)
-                                        obj = {
-                                            ...obj,
-                                            Datas : {
-                                                ...obj.Datas,
-                                                Basics : {
-                                                    ...obj.Datas.Basics,
-                                                    [name] : action.precent,
-                                                    Total : {
-                                                        ...obj.Datas.Basics.Total,
-                                                        completed :  (obj.Datas.Basics.Total.completed + 1),
-                                                        Overall_Basics : Math.round(tot),
-                                                        [name] : true
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        console.log("send Data :", obj)
-                                        updateuser1(obj, action.name, newname)
-                                    }
-                                }
-                                else {
+        }
+
+        case actions.UPDATE_USER_OTHERS : {
+            console.log("UPDATE_USER_OTHERS :")
+
+            const array = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
+            const newname = false
+
+            let temp = state.userData.map(obj => {
+                if( obj.uid === action.userid ) {
+                    console.log("action.name :" ,action.name)
+                    
+                    // array.map (name => {
+                    //     if( name == action.name){
+                            console.log(`obj.Datas?.Basics?.${action.name} :`, obj.Datas?.Basics?.[action.name])
+                            console.log(`obj.Datas?.Basics?.Total?.${action.name} :`, obj.Datas?.Basics?.Total?.[action.name])
+                            if( obj.Datas?.Basics?.[action.name] > action.precent ){
+                                return obj
+                            }
+                            else if( obj.Datas?.Basics?.[action.name] == 90 ){
+
+                                if(obj.Datas?.Basics?.Total?.[action.name] == false){
+                                    console.log("reducer-newname")
+                                    newname = true
+                                    const tot = ((obj.Datas.Basics.Total.completed + 1)  / 26 * 100)
                                     obj = {
                                         ...obj,
                                         Datas : {
                                             ...obj.Datas,
                                             Basics : {
                                                 ...obj.Datas.Basics,
-                                                [name] : action.precent
-                                            } 
+                                                [action.name] : action.precent,
+                                                Total : {
+                                                    ...obj.Datas.Basics.Total,
+                                                    completed :  (obj.Datas.Basics.Total.completed + 1),
+                                                    Overall_Basics : Math.round(tot),
+                                                    [action.name] : true
+                                                }
+                                            }
                                         }
                                     }
                                     console.log("send Data :", obj)
-                                    updateuser1(obj, action.name)
+                                    updateuserothers(obj, action.name, newname)
                                 }
                             }
+                            else {
+                                obj = {
+                                    ...obj,
+                                    Datas : {
+                                        ...obj.Datas,
+                                        Basics : {
+                                            ...obj.Datas.Basics,
+                                            [action.name] : action.precent
+                                        } 
+                                    }
+                                }
+                                console.log("send Data :", obj)
+                                updateuserothers(obj, action.name, newname)
+                            }
+                        }
                             
-                        })
-                    }
+                    })
                     return obj
-                }
+                // }
                 
-                return obj
-                })
-                return {
-                    userData:temp
-                }
+                // return obj
+                // })
+            return {
+                userData:temp
+            }
 
         }
 
-        
-        default:
-        
+    default:  return state;
+
     }
-    return state;
+    
 }
 
 export default Reducer1

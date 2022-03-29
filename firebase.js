@@ -59,9 +59,8 @@ export function createdata (users) {
 
 
 
-export function updateuser1 (users, name, newname) {
+export function updateuserintro (users, name) {
 
-  if(name === "Intro"){
     db.collection("userData")
     .doc(users.uid)
     .set({
@@ -75,8 +74,11 @@ export function updateuser1 (users, name, newname) {
       }
     })
     .then(()=>console.log("Data is Updated"))
-  }
-  else if(name === "Overall_Basics"){
+  
+}
+
+export function updateuseroverall (users, name) {
+  
     db.collection("userData")
     .doc(users.uid)
     .set({
@@ -105,14 +107,25 @@ export function updateuser1 (users, name, newname) {
       }
     })
     .then(()=>console.log("Data is Updated"))
-  }else {
+  
+}
 
-    const array1 = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
+export function updateuserothers (users, name, newname) {
 
-    array1.map (object => {
-      if( object === name){
+  const array1 = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
+
+    // array1.map (object => {
+
+    //   if( object == name){
         
-        if( newname === "Total"){
+        if( newname == true ){
+          let value
+          for( let names in users.Datas.Basics){
+            (names == name ) ? (value = users.Datas.Basics[names]) : null
+          }
+          console.log("firebas-NewName")
+          console.log(`${name} :`, value);
+
           db.collection("userData")
             .doc(users.uid)
             .set({
@@ -123,11 +136,12 @@ export function updateuser1 (users, name, newname) {
                 ...users.Datas,
                 Basics : {
                   ...users.Datas.Basics,
+                   [name] : value,
                   Total : {
                     ...users.Datas.Basics.Total,
                     completed :  users.Datas.Basics.Total.completed,
                     Overall_Basics : users.Datas.Basics.Total.Overall_Basics,
-                    [object] : true
+                    [name] : true
                   },
                   
                 },
@@ -137,13 +151,12 @@ export function updateuser1 (users, name, newname) {
             })
             .then(()=>console.log("Data is Updated"))
           }
-        }
         else {
             let value
-            for( let name in users.Datas.Basics){
-              (name === "View") ? (value = users.Datas.Basics[name]) : null
+            for( let names in users.Datas.Basics){
+              (names == name) ? (value = users.Datas.Basics[names]) : null
             }
-            console.log("view :", value);
+            console.log(`${name} :`, value);
 
             db.collection("userData")
             .doc(users.uid)
@@ -155,7 +168,7 @@ export function updateuser1 (users, name, newname) {
                 ...users.Datas,
                 Basics : {
                   ...users.Datas.Basics,
-                  [object] : value,
+                  [name] : value,
                   
                 },
                 
@@ -164,8 +177,8 @@ export function updateuser1 (users, name, newname) {
             })
             .then(()=>console.log("Data is Updated"))
           } 
-    })
-  }
+    //       return
+    // })
   
 }
 
