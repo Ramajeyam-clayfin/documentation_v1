@@ -18,7 +18,7 @@ export const Item2 = () => {
   const name = name1.toString()
 
  useEffect(()=>{
-  console.log("Dispatching Action : {1}")
+  console.log(`Dispatching Action : ${name}`)
    dispatch(updateuser(userid, percent, name))
 },[])
 

@@ -93,12 +93,12 @@ export function updateuseroverall (users, name) {
             Total_Basics : users.Datas.Basics.Total.Total_Basics,
             completed :  users.Datas.Basics.Total.completed,
             Overall_Basics : users.Datas.Basics.Total.Overall_Basics,
-            View : false,
-            Text : false,
-            Image : false,
-            TextInput : false,
-            ScrollView : false,
-            StyleSheet : false,
+            // View : false,
+            // Text : false,
+            // Image : false,
+            // TextInput : false,
+            // ScrollView : false,
+            // StyleSheet : false,
           },
           
         },
@@ -112,17 +112,17 @@ export function updateuseroverall (users, name) {
 
 export function updateuserothers (users, name, newname) {
 
-  const array1 = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
+  // const array1 = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
 
     // array1.map (object => {
 
     //   if( object == name){
         
         if( newname == true ){
-          let value
-          for( let names in users.Datas.Basics){
-            (names == name ) ? (value = users.Datas.Basics[names]) : null
-          }
+          let value = users.Datas.Basics[name]
+          // for( let iterator in users.Datas.Basics){
+          //   (iterator == name ) ? (value = users.Datas.Basics[iterator]) : null
+          // }
           console.log("firebas-NewName")
           console.log(`${name} :`, value);
 
@@ -141,7 +141,7 @@ export function updateuserothers (users, name, newname) {
                     ...users.Datas.Basics.Total,
                     completed :  users.Datas.Basics.Total.completed,
                     Overall_Basics : users.Datas.Basics.Total.Overall_Basics,
-                    [name] : true
+                    // [name] : true
                   },
                   
                 },
@@ -152,10 +152,10 @@ export function updateuserothers (users, name, newname) {
             .then(()=>console.log("Data is Updated"))
           }
         else {
-            let value
-            for( let names in users.Datas.Basics){
-              (names == name) ? (value = users.Datas.Basics[names]) : null
-            }
+          let value = users.Datas.Basics[name]
+            // for( let names in users.Datas.Basics){
+            //   (names == name) ? (value = users.Datas.Basics[names]) : null
+            // }
             console.log(`${name} :`, value);
 
             db.collection("userData")
@@ -192,7 +192,6 @@ export async function getData (getusers){
   snapshot.forEach(obj => {
     users.push(obj.data())
   })
-  // console.log("users :", users)
 
   getusers(users)
 }

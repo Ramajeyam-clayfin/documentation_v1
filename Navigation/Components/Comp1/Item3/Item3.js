@@ -21,7 +21,7 @@ export const Item3 = () => {
   
 
  useEffect(()=>{
-  console.log("Dispatching Action : {1}")
+  console.log(`Dispatching Action : ${name}`)
    dispatch(updateuser(userid, percent, name))
 },[])
   const loading = () => {

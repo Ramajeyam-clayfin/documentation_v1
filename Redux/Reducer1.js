@@ -127,12 +127,12 @@ const Reducer1 = (state = initialState, action) => {
                                             Total_Basics : 26,
                                             completed :  action.precent,
                                             Overall_Basics : Math.round(tot),
-                                            View : false,
-                                            Text : false,
-                                            Image : false,
-                                            TextInput : false,
-                                            ScrollView : false,
-                                            StyleSheet : false,
+                                            // View : false,
+                                            // Text : false,
+                                            // Image : false,
+                                            // TextInput : false,
+                                            // ScrollView : false,
+                                            // StyleSheet : false,
                                         }
                                     }
                                 }
@@ -157,8 +157,8 @@ const Reducer1 = (state = initialState, action) => {
         case actions.UPDATE_USER_OTHERS : {
             console.log("UPDATE_USER_OTHERS :")
 
-            const array = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
-            const newname = false
+            // const array = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
+            let newname = false
 
             let temp = state.userData.map(obj => {
                 if( obj.uid === action.userid ) {
@@ -168,12 +168,12 @@ const Reducer1 = (state = initialState, action) => {
                     //     if( name == action.name){
                             console.log(`obj.Datas?.Basics?.${action.name} :`, obj.Datas?.Basics?.[action.name])
                             console.log(`obj.Datas?.Basics?.Total?.${action.name} :`, obj.Datas?.Basics?.Total?.[action.name])
-                            if( obj.Datas?.Basics?.[action.name] > action.precent ){
+                            if( obj.Datas?.Basics?.[action.name] >= action.precent ){
                                 return obj
                             }
-                            else if( obj.Datas?.Basics?.[action.name] == 90 ){
+                            else if( action.precent == 90 ){
 
-                                if(obj.Datas?.Basics?.Total?.[action.name] == false){
+                                // if(obj.Datas?.Basics?.Total?.[action.name] == false){
                                     console.log("reducer-newname")
                                     newname = true
                                     const tot = ((obj.Datas.Basics.Total.completed + 1)  / 26 * 100)
@@ -188,14 +188,14 @@ const Reducer1 = (state = initialState, action) => {
                                                     ...obj.Datas.Basics.Total,
                                                     completed :  (obj.Datas.Basics.Total.completed + 1),
                                                     Overall_Basics : Math.round(tot),
-                                                    [action.name] : true
+                                                    // [action.name] : true
                                                 }
                                             }
                                         }
                                     }
                                     console.log("send Data :", obj)
                                     updateuserothers(obj, action.name, newname)
-                                }
+                                // }
                             }
                             else {
                                 obj = {
@@ -212,9 +212,9 @@ const Reducer1 = (state = initialState, action) => {
                                 updateuserothers(obj, action.name, newname)
                             }
                         }
-                            
+                        return obj
                     })
-                    return obj
+                    
                 // }
                 
                 // return obj
