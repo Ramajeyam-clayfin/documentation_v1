@@ -1,6 +1,7 @@
 import React from "react"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import DrawerContent from "./DrawerContent";
 
 import { Login } from "./Login/Login";
 import { Home }  from "./Home"
@@ -51,7 +52,9 @@ export  function StackNavigation() {
                 initialRouteName="Login"
                  screenOptions={{
                     headerShown: false
-                }} >
+                }}
+                drawerContent={(props) => <DrawerContent {...props} />}
+                >
                     
                 <Drawer.Screen  name="Login"  component={Login} />
 

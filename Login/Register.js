@@ -1,6 +1,6 @@
 
 
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import React,{useState, useEffect} from 'react'
 import { Datas } from "../Context/Context";
@@ -17,6 +17,7 @@ const Register = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [user , setUser ] = useState([])
+    const [loading, SetLoading] = useState(false)
 
     const navigation = useNavigation();
     const dispatch = useDispatch()
@@ -44,9 +45,11 @@ const Register = () => {
       }, [])
 
     const handleSignUp = () => {
+      SetLoading(true);
         auth
           .createUserWithEmailAndPassword(email, password )
           .then(userCredentials => {
+            SetLoading(false);
             const user = userCredentials.user;
             const useruid = auth.currentUser.uid
             dispatch(add_user(useruid, name, email))
@@ -56,6 +59,7 @@ const Register = () => {
             console.log('Registered with:', user.email);
           })
           .catch(error => {
+            SetLoading(false);
             if (error.code === 'auth/email-already-in-use') {
               setpasserror('That email address is already in use!')
             }
@@ -72,6 +76,15 @@ const Register = () => {
 
   return (
     <View style={styles.container1}>
+      {
+            loading ? ( <ActivityIndicator  
+              size="large" 
+              color="#61dafb"
+              style={{flex:1, justifyContent: 'center', alignItems:"center"}} 
+              // animating={loading}
+          
+            />) : (
+            <>
         <StatusBar style="auto" />
         <Text style={styles.header}>Register</Text>
         
@@ -113,6 +126,9 @@ const Register = () => {
             <TouchableOpacity  onPress={()=>navigation.navigate("Login")}>
                 <Text style={styles.forgot_button}>Back to Login Page</Text>
             </TouchableOpacity>
+             </>
+             )
+           }
     </View>
   )
 }

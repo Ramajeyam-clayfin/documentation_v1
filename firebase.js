@@ -33,6 +33,19 @@ const auth = firebase.auth()
 
 export { db, auth };
 
+export async function getData (getusers){
+
+  let users = []
+
+  const snapshot = await db.collection("userData").get()
+
+  snapshot.forEach(obj => {
+    users.push(obj.data())
+  })
+
+  getusers(users)
+}
+
 
 export function adduser (user) {
   db.collection("userData")
@@ -183,15 +196,3 @@ export function updateuserothers (users, name, newname) {
 }
 
 
-export async function getData (getusers){
-
-  let users = []
-
-  const snapshot = await db.collection("userData").get()
-
-  snapshot.forEach(obj => {
-    users.push(obj.data())
-  })
-
-  getusers(users)
-}

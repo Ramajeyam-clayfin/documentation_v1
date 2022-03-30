@@ -1,23 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableHighlight,   } from 'react-native';
 import { Navbar } from './Navbar';
-import React, {useEffect, useContext} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import { Datas } from './Context/Context';
-import { auth } from './firebase';
+import { auth, getData } from './firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import { createData } from './Redux/Actions';
+import { initialize } from './Redux/Actions';
 
 
 export const Home = (props) => {
+
     const { navigation } = props
     const {  login, trigger, userid } = useContext(Datas)
-    const userData = useSelector((state) => state?.userData)
+    
+    const [user , setUser ] = useState([])
+    const userData = useSelector(state => state?.userData)
     const dispatch = useDispatch()
+
+    const getusers = (users) => setUser(users)
+    getData(getusers)
+
+    const useruid = auth.currentUser.uid
+    dispatch(initialize(user, useruid))
     // console.log("userData :", userData)
     useEffect(()=>{
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
-          dispatch(createData(userid))
+          dispatch(createData(useruid))
         }
       })
   

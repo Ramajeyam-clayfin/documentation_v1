@@ -12,17 +12,22 @@ const Reducer1 = (state = initialState, action) => {
     switch (action.type) {
 
         case actions.INITIALIZE : {
-            console.log("INITIALIZE :", action.value )
-            const temp = action.value.filter (obj => obj.uid === action.userid)
-            console.log("User Detail : ",temp)
-            return { userData : temp }
+
+            if(!action.value){
+                console.log("INITIALIZE :", action.value )
+                const temp = action.value.filter (obj => obj.uid === action.userid)
+                console.log("User Detail : ",temp)
+                return { userData : temp }
+            }
+            else return state
         }
 
         case actions.ADD_USER : {
 
             const user = state.userData.filter(obj => obj.uid === action.userid)
+            console.log("user.length :", user.length)
 
-            if( user.length ){
+            if(!user.length){
                
                 console.log("ADD_USER :", action.email)
                 console.log("new user")

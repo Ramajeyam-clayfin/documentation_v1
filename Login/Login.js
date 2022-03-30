@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, KeyboardAvoidingView} from "react-native"
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator} from "react-native"
 import { StatusBar } from 'expo-status-bar';
 import React,{useState, useEffect } from 'react'
 import { Validation } from "./Validation"
@@ -12,33 +12,47 @@ export const Login = () => {
     const { userid, setUserid ,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
 
     const navigation = useNavigation()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     // console.log("navigation",navigation)
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user , setUser ] = useState([])
+    const [loading, SetLoading] = useState(false)
 
-    const getusers = (users) => setUser(users)
+   
 
-    useEffect(()=>{
-      getData(getusers)
+    // useEffect(()=>{
+    //   getData(getusers)
       
-    },[])
+    // },[])
 
-    useEffect(()=>{ dispatch(initialize(user, userid)) },[user && userid])
-
-    useEffect(() => {
+    // useEffect(()=>{ dispatch(initialize(user, userid)) },[user && userid])
+    const Navi = () => {
      
-      const unsubscribe = auth.onAuthStateChanged(user => {
-        if (user) {
+      const unsubscribe = auth.onAuthStateChanged(usered => {
+        if (usered) {
+          // dispatch(initialize(user, userid))
           navigation.navigate("Home")
         }
         // else navigation.navigate("Login")
       })
   
       return unsubscribe
-    }, [trigger])
+    }
+
+    // useEffect(() => {
+     
+    //   const unsubscribe = auth.onAuthStateChanged(usered => {
+    //     if (usered) {
+    //       // console.log("usered :", usered)
+    //       dispatch(initialize(user, usered.uid))
+    //       navigation.navigate("Home")
+    //     }
+    //     // else navigation.navigate("Login")
+    //   })
+  
+    //   return unsubscribe
+    // }, [trigger])
 
     // const loginhandler = () => {
     //     let result = Validation(email, password);
@@ -50,19 +64,25 @@ export const Login = () => {
     // }
     
     const handleLogin = () => {
+      SetLoading(true);
       auth
-        .signInWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-          const user = userCredentials.user;
-          console.log('Logged in with:', user.email);
-          const useruid = auth.currentUser.uid
-          setUserid(useruid)
+      .signInWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+          SetLoading(false)
+          setTrigger(!trigger)
+          const user = userCredentials.user
+          console.log('Logged in with:', user.email)
           setEmail("")
           setPassword("")
           setpasserror("") 
-          setTrigger(!trigger)
-        })
-        .catch(error => {
+          Navi()
+          // const getusers = (users) => setUser(users)
+          // getData(getusers)
+          
+          // const useruid = auth.currentUser.uid
+          // setUserid(useruid)
+        }).catch(error => {
+          SetLoading(false);
           if (error.code === 'auth/invalid-email') {
             setpasserror('Invalid-email !')
           }
@@ -76,55 +96,67 @@ export const Login = () => {
         })
     }
 
-    
 
+    
     return(
         <View style={styles.container}>
-             {/* <StatusBar style="auto" /> */}
-            <Image style={styles.image} source={require("../Images/logo.png")} />
-            <Text style={styles.header}>Welcome to React</Text>
-        
-           
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.TextInput}
-                placeholder="Email"
-                value={email}
-                placeholderTextColor="#20232a"
-                onChangeText={(email) => setEmail(email)}
-              />
-              
-            </View>
-            {emailerror.length ?
-                   <Text style={{color:"red", marginBottom: 10,}}>{emailerror}</Text> :  null
-                }
-                
-        
-            <View style={styles.inputView}>
+          {
+            loading ? ( <ActivityIndicator  
+              size="large" 
+              color="#61dafb"
+              style={{flex:1, justifyContent: 'center', alignItems:"center"}} 
+              // animating={loading}
+          
+            />) : (
+            <>
+              {/* <StatusBar style="auto" /> */}
+              <Image style={styles.image} source={require("../Images/logo.png")} />
+              <Text style={styles.header}>Welcome to React</Text>
+          
+            
+              <View style={styles.inputView}>
                 <TextInput
-                style={styles.TextInput}
-                placeholder="Password"
-                value={password}
-                placeholderTextColor="#20232a"
-                secureTextEntry={true}
-                onChangeText={(password) => setPassword(password)}
+                  style={styles.TextInput}
+                  placeholder="Email"
+                  value={email}
+                  placeholderTextColor="#20232a"
+                  onChangeText={(email) => setEmail(email)}
                 />
                 
-            </View>
-            {passerror.length ?
-                   <Text style={{color:"red", marginBottom: 10,}}>{passerror}</Text> :  null
-                }
-        
-            <TouchableOpacity>
-                <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity>
-        
-            <TouchableOpacity style={styles.loginBtn} onPress={()=>handleLogin()}>
-                <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.regisBtn} onPress={()=>navigation.navigate("Register")}>
-                <Text style={[styles.loginText,{color:"white"}]}>SIGNUP</Text>
-            </TouchableOpacity>
+              </View>
+              {emailerror.length ?
+                    <Text style={{color:"red", marginBottom: 10,}}>{emailerror}</Text> :  null
+                  }
+                  
+          
+              <View style={styles.inputView}>
+                  <TextInput
+                  style={styles.TextInput}
+                  placeholder="Password"
+                  value={password}
+                  placeholderTextColor="#20232a"
+                  secureTextEntry={true}
+                  onChangeText={(password) => setPassword(password)}
+                  />
+                  
+              </View>
+              {passerror.length ?
+                    <Text style={{color:"red", marginBottom: 10,}}>{passerror}</Text> :  null
+                  }
+          
+              <TouchableOpacity>
+                  <Text style={styles.forgot_button}>Forgot Password?</Text>
+              </TouchableOpacity>
+          
+              <TouchableOpacity style={styles.loginBtn} onPress={()=>handleLogin()}>
+                  <Text style={styles.loginText}>LOGIN</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.regisBtn} onPress={()=>navigation.navigate("Register")}>
+                  <Text style={[styles.loginText,{color:"white"}]}>SIGNUP</Text>
+              </TouchableOpacity>
+            </>
+            )
+          }
         </View>
     )
 }
