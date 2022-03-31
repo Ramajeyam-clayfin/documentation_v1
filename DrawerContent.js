@@ -25,9 +25,7 @@ import { useNavigation } from '@react-navigation/native';
     const handleSignOut = () => {
         auth
           .signOut()
-          .then(() => {
-            navigation.navigate("Login")
-          })
+          .then(() => navigation.navigate("Login"))
           .catch(error => alert(error.message))
       }
     
@@ -159,6 +157,7 @@ const styles = StyleSheet.create({
     },
     drawerSection: {
       marginTop: 15,
+      marginLeft:15
     },
     bottomDrawerSection: {
         marginBottom: 15,

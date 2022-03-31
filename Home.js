@@ -21,12 +21,13 @@ export const Home = (props) => {
     const getusers = (users) => setUser(users)
     getData(getusers)
 
-    const useruid = auth.currentUser.uid
-    dispatch(initialize(user, useruid))
+    
     // console.log("userData :", userData)
     useEffect(()=>{
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
+          const useruid = auth?.currentUser.uid
+      dispatch(initialize(user, useruid))
           dispatch(createData(useruid))
         }
       })
@@ -68,7 +69,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#222222',
    
-
   },
   start_btn:{
     backgroundColor:"#61dafb",

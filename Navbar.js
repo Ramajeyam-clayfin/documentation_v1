@@ -9,14 +9,14 @@ import { auth } from './firebase';
 export const Navbar = ({navigation}) => {
   const { setLogin} = React.useContext(Datas)
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.navigate("Login")
-      })
-      .catch(error => alert(error.message))
-  }
+  // const handleSignOut = () => {
+  //   auth
+  //     .signOut()
+  //     .then(() => {
+  //       navigation.navigate("Login")
+  //     })
+  //     .catch(error => alert(error.message))
+  // }
 
     return(
         <View style={styles.container}>
