@@ -38,10 +38,10 @@ export const Navbar = ({navigation}) => {
           </View>
           <View style={styles.logout}>
           <Ionicons 
-                  name="log-out-outline"
+                  name="person-circle-outline"
                   size={30}
                   color="white"
-                  onPress={() => handleSignOut()}
+                  onPress={() => navigation.navigate("User")}
               />
           </View>
             
