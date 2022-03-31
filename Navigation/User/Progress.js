@@ -2,15 +2,29 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Ionicons, } from "@expo/vector-icons";
+import { useSelector } from 'react-redux';
+import { Navbar } from '../../Navbar';
+import { StatusBar } from 'expo-status-bar';
+import { useNavigation } from '@react-navigation/native';
 
 const Progress = () => {
+    const navigation = useNavigation()
+    const user = useSelector(state => state.userData)
+    const checking = user.map(obj => obj.Datas.Intro)
+    const intro = Number(checking)
+    const checking2 = user.map(obj => obj.Datas.Basics.Total.Overall_Basics)
+    const components = Number(checking2)
+    console.log("checking2", components)
   return (
     <View style={styles.container1}>
+         <StatusBar style="auto" />
+        <Navbar navigation={navigation}/>
+        <View style={{flex:1}}>
         <View style={styles.container2}>
             <View style={{alignItems:"center"}}>
                 <Text style={{marginBottom:10}}>Components</Text>
                 <CircularProgress
-                    value={40}
+                    value={components}
                     activeStrokeColor={'#05c5fa'}
                     inActiveStrokeColor={'#61dafb'}
                     //   activeStrokeSecondaryColor={'#cdf3fe'}
@@ -27,7 +41,7 @@ const Progress = () => {
             <View  style={{alignItems:"center"}}>
                 <Text style={{marginBottom:10}}>Introduction</Text>
                 <CircularProgress
-                value={70}
+                value={intro}
                 activeStrokeColor={'#05c5fa'}
                 inActiveStrokeColor={'#61dafb'}
                 //   activeStrokeSecondaryColor={'#cdf3fe'}
@@ -96,6 +110,7 @@ const Progress = () => {
                 </View>
             </View>
         </View>
+        </View>
     </View>
   )
 }
@@ -105,7 +120,6 @@ export default Progress
 const styles = StyleSheet.create({
     container1:{
         flex:1,
-        top:38,
         // alignItems:"center",
         // justifyContent:"center",
         top:35

@@ -20,7 +20,7 @@ import { useNavigation } from '@react-navigation/native';
     const email1 = user.map(obj => obj.email)
     const email = email1.toString()
 
-    console.log("Drawer :", name)
+    // console.log("Drawer :", name)
 
     const handleSignOut = () => {
         auth

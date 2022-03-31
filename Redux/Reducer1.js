@@ -12,9 +12,10 @@ const Reducer1 = (state = initialState, action) => {
     switch (action.type) {
 
         case actions.INITIALIZE : {
+            console.log(action.value.length)
 
-            if(!action.value){
-                console.log("INITIALIZE :", action.value )
+            if((action.value).length){
+                console.log("INITIALIZING :" )
                 const temp = action.value.filter (obj => obj.uid === action.userid)
                 console.log("User Detail : ",temp)
                 return { userData : temp }

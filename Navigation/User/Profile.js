@@ -1,13 +1,28 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Ionicons, } from "@expo/vector-icons";
 import React from 'react'
-// import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import { Navbar } from '../../Navbar';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { auth } from '../../firebase';
 
 const Profile = () => {
     const navigation = useNavigation()
+    const user = useSelector(state => state.userData)
+
+    const name1 = user.map(obj => obj.name)
+    const name = name1.toString()
+    const email1 = user.map(obj => obj.email)
+    const email = email1.toString()
+
+    const handleSignOut = () => {
+        auth
+          .signOut()
+          .then(() => navigation.navigate("Login"))
+          .catch(error => alert(error.message))
+      }
+
   return (
     <View style={styles.container1}>
         <StatusBar style="auto" />
@@ -24,8 +39,8 @@ const Profile = () => {
         {/* <View style={styles.line}><View></View></View> */}
         <View style={styles.container3}>
             <View>
-                <Text style={styles.text}>Ramajeyam</Text>
-                <Text style={styles.text2}>ramajeyam@gmail.com</Text>
+                <Text style={styles.text}>{name}</Text>
+                <Text style={styles.text2}>{email}</Text>
             </View>
             <TouchableOpacity 
                 style={styles.regisBtn}
@@ -35,7 +50,7 @@ const Profile = () => {
               </TouchableOpacity>
               <TouchableOpacity 
                 style={styles.regisBtn} 
-                // onPress={()=>navigation.navigate("Register")}
+                onPress={()=>handleSignOut()}
             >
                   <Text style={styles.loginText}>LOGOUT</Text>
               </TouchableOpacity>

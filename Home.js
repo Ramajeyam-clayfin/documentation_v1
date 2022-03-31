@@ -15,20 +15,21 @@ export const Home = (props) => {
     const {  login, trigger, userid } = useContext(Datas)
     
     const [user , setUser ] = useState([])
-    const userData = useSelector(state => state?.userData)
+    const userData = useSelector(state => state.userData)
     const dispatch = useDispatch()
 
-    const getusers = (users) => setUser(users)
-    getData(getusers)
-
-    
-    // console.log("userData :", userData)
     useEffect(()=>{
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
-          const useruid = auth?.currentUser.uid
-      dispatch(initialize(user, useruid))
-          dispatch(createData(useruid))
+          const getusers = (values) => {
+            setUser(values)
+            const useruid = auth.currentUser.uid;
+            console.log("Disaptching Initialize with ID : ", useruid);
+            dispatch(initialize(values, useruid))
+            dispatch(createData(useruid))
+          } 
+          getData(getusers)
+          
         }
       })
   

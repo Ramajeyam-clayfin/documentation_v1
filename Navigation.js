@@ -39,8 +39,9 @@ function TabNavigator () {
 
     return (
         <Tab.Navigator 
-            screenOptions={({ route }) => ({
-                headerShown: false,
+        // style={{ bottom: 30}} 
+         screenOptions={({ route }) => ({
+                
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
             //   <ion-icon name="information-circle-outline"></ion-icon>
@@ -54,6 +55,7 @@ function TabNavigator () {
   
               return <Ionicons name={iconName} size={size} color={color} />;
             },
+            
             tabBarActiveTintColor: '#61dafb',
             tabBarInactiveTintColor: 'gray',
           })}
