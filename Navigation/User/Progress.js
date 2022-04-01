@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import React from 'react'
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Ionicons, } from "@expo/vector-icons";
@@ -22,9 +22,9 @@ const Progress = () => {
         <View style={{flex:1}}>
         <View style={styles.container2}>
             <View style={{alignItems:"center"}}>
-                <Text style={{marginBottom:10}}>Components</Text>
+                <Text style={{marginBottom:10}}>Introduction</Text>
                 <CircularProgress
-                    value={components}
+                    value={intro}
                     activeStrokeColor={'#05c5fa'}
                     inActiveStrokeColor={'#61dafb'}
                     //   activeStrokeSecondaryColor={'#cdf3fe'}
@@ -39,9 +39,9 @@ const Progress = () => {
                     />
             </View>
             <View  style={{alignItems:"center"}}>
-                <Text style={{marginBottom:10}}>Introduction</Text>
+                <Text style={{marginBottom:10}}> Components</Text>
                 <CircularProgress
-                value={intro}
+                value={components}
                 activeStrokeColor={'#05c5fa'}
                 inActiveStrokeColor={'#61dafb'}
                 //   activeStrokeSecondaryColor={'#cdf3fe'}
@@ -58,7 +58,8 @@ const Progress = () => {
         </View>
         <View style={styles.container3}>
             <Text style={styles.heading}>LeaderBoard</Text>
-            <View>
+            <View style={{flexShrink:1, paddingBottom:15}}>
+                <ScrollView>
                 <View style={styles.card}>
                     <View style={{ alignItems:"center"}}>
                         <Ionicons 
@@ -108,6 +109,57 @@ const Progress = () => {
                     <Text  style={styles.cardText}>99 %</Text>
 
                 </View>
+                <View style={styles.card}>
+                    <Ionicons 
+                    name="person-circle-outline"
+                    size={40}
+                    color="#000000"
+                    />
+                    <Text style={styles.cardText}>Keerthana</Text>
+                    <Text  style={styles.cardText}>99 %</Text>
+
+                </View>
+                <View style={styles.card}>
+                    <Ionicons 
+                    name="person-circle-outline"
+                    size={40}
+                    color="#000000"
+                    />
+                    <Text style={styles.cardText}>Keerthana</Text>
+                    <Text  style={styles.cardText}>99 %</Text>
+
+                </View>
+                <View style={styles.card}>
+                    <Ionicons 
+                    name="person-circle-outline"
+                    size={40}
+                    color="#000000"
+                    />
+                    <Text style={styles.cardText}>Keerthana</Text>
+                    <Text  style={styles.cardText}>99 %</Text>
+
+                </View>
+                <View style={styles.card}>
+                    <Ionicons 
+                    name="person-circle-outline"
+                    size={40}
+                    color="#000000"
+                    />
+                    <Text style={styles.cardText}>Keerthana</Text>
+                    <Text  style={styles.cardText}>99 %</Text>
+
+                </View>
+                <View style={styles.card}>
+                    <Ionicons 
+                    name="person-circle-outline"
+                    size={40}
+                    color="#000000"
+                    />
+                    <Text style={styles.cardText}>Keerthana</Text>
+                    <Text  style={styles.cardText}>99 %</Text>
+
+                </View>
+                </ScrollView>
             </View>
         </View>
         </View>
@@ -147,7 +199,8 @@ const styles = StyleSheet.create({
         color:"black",
         fontSize:40,
         alignSelf:"center",
-        marginBottom: 8,
+        marginBottom: 30,
+        marginTop:10,
         fontWeight:"bold",
     },
     card:{
@@ -160,7 +213,8 @@ const styles = StyleSheet.create({
         borderColor:"black",
         borderRadius:30,
         padding: 5,
-        marginBottom: 10,
+        marginBottom: 5,
+        marginTop:10,
         width:"90%",
         alignSelf:"center",
         backgroundColor:"#00ff99"

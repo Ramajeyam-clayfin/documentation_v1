@@ -21,18 +21,18 @@ export const Github = (props) => {
     return(
         <View style={styles.container}>
             <StatusBar style="auto" />
-            {/* <Navbar navigation={navigation}/> */}
-            <TouchableOpacity
+            <Navbar navigation={navigation}/>
+            {/* <TouchableOpacity
              onPress={()=>navigation.navigate("Home")}
              style={{borderColor:"black", borderWidth:2, width:100, height:30, backgroundColor:"#61dafb"}}
             >
               <Text style={{marginLeft:10, color:"black", fontSize:18, fontWeight:'bold'}}>{`<< Home`}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={{flex:1}}>
 
                   <WebView 
                     source={{ uri: 'https://github.com/facebook/react-native' }} 
-                    style={{ marginTop: 20 }} 
+                    style={{ marginTop: 0 }} 
                     renderLoading={loading}
                     startInLoadingState={true}
                 

@@ -39,12 +39,10 @@ function TabNavigator () {
 
     return (
         <Tab.Navigator 
-        // style={{ bottom: 30}} 
          screenOptions={({ route }) => ({
-                
+            headerShown: false ,
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
-            //   <ion-icon name="information-circle-outline"></ion-icon>
               if (route.name === 'Profile') {
                 iconName = focused ? 'people-outline' : 'people-outline';
               } else if (route.name === 'Progress') {
@@ -103,17 +101,16 @@ function StackNavigation() {
 
                     <Drawer.Screen name="Guides" component={Guides} />
 
-                    <Drawer.Screen name="Components" component={StackNavigation} />
-
-                    <Drawer.Screen name="Api" component={Api} />
-
-                    <Drawer.Screen name="Architecture" component={Architecture} />
-
-                    <Drawer.Screen name="Blog" component={Blog} />
+                    <Drawer.Screen name="Components" component={StackNavigation} />                  
 
                     <Drawer.Screen name="User" component={TabNavigator} />
 
                     <Drawer.Screen name="Github" component={Github} />
+                     {/* <Drawer.Screen name="Api" component={Api} /> */}
+
+                    {/* <Drawer.Screen name="Architecture" component={Architecture} /> */}
+
+                    {/* <Drawer.Screen name="Blog" component={Blog} /> */}
                 </Drawer.Navigator>
             </Provider>
         </DataProvider>

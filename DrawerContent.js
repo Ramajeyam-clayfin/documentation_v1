@@ -42,7 +42,7 @@ import { useNavigation } from '@react-navigation/native';
                                 name="person-circle-outline"
                                 size={50}
                                 color="white"
-                                // onPress={() => navigation.toggleDrawer()}
+                                onPress={() => navigation.navigate("User")}
                             />
                            
                             <View style={{marginLeft:15, flexDirection:'column'}}>
@@ -55,39 +55,43 @@ import { useNavigation } from '@react-navigation/native';
 
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem 
-                            // icon={({color, size}) => (
-                            //     <MaterialCommunityIcons 
-                            //     name="home-outline" 
-                            //     color={color}
-                            //     size={size}
-                            //     />
-                            // )}
+                             icon={({color, size}) => (
+                                <Ionicons 
+                                    name="home"
+                                    size={size}
+                                    color={color}
+                                    onPress={() => {navigation.navigate('Home')}}
+                                />
+                            )}
+                            
                             label="Home"
                             onPress={() => {navigation.navigate('Home')}}
                         />
                         <DrawerItem 
-                            // icon={({color, size}) => (
-                            //     <MaterialCommunityIcons 
-                            //     name="account-outline" 
-                            //     color={color}
-                            //     size={size}
-                            //     />
-                            // )}
+                           icon={({color, size}) => (
+                            <Ionicons 
+                                name="book"
+                                size={size}
+                                color={color}
+                                onPress={() => {navigation.navigate('Home')}}
+                            />
+                        )}
                             label="Guides"
                             onPress={() => {navigation.navigate('Guides')}}
                         />
                         <DrawerItem 
-                            // icon={({color, size}) => (
-                            //     <MaterialCommunityIcons 
-                            //     name="bookmark-outline" 
-                            //     color={color}
-                            //     size={size}
-                            //     />
-                            // )}
+                            icon={({color, size}) => (
+                                <Ionicons 
+                                    name="library"
+                                    size={size}
+                                    color={color}
+                                    onPress={() => {navigation.navigate('Home')}}
+                                />
+                            )}
                             label="Components"
                             onPress={() => {navigation.navigate('Components')}}
                         />
-                        <DrawerItem 
+                        {/* <DrawerItem 
                             label="Api"
                             onPress={() => {navigation.navigate('Api')}}
                         />
@@ -98,8 +102,16 @@ import { useNavigation } from '@react-navigation/native';
                         <DrawerItem 
                             label="Blog"
                             onPress={() => {navigation.navigate('Blog')}}
-                        />
+                        /> */}
                         <DrawerItem 
+                            icon={({color, size}) => (
+                                <Ionicons 
+                                    name="logo-github"
+                                    size={size}
+                                    color={color}
+                                    onPress={() => {navigation.navigate('Home')}}
+                                />
+                            )}
                             label="Github"
                             onPress={() => {navigation.navigate('Github')}}
                         />
@@ -122,8 +134,8 @@ import { useNavigation } from '@react-navigation/native';
                     icon={({color, size}) => (
                         <Ionicons 
                             name="log-out-outline"
-                            size={30}
-                            color="black"
+                            size={size}
+                            color={color}
                             onPress={() => handleSignOut()}
                         />
                     )}
@@ -157,7 +169,7 @@ const styles = StyleSheet.create({
     },
     drawerSection: {
       marginTop: 15,
-      marginLeft:15
+      marginLeft:10
     },
     bottomDrawerSection: {
         marginBottom: 15,

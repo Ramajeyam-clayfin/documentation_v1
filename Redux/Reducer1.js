@@ -59,6 +59,7 @@ const Reducer1 = (state = initialState, action) => {
                 console.log("CREATE_DATA :", action.userid)
                 let temp = state.userData.map(obj => {
                 if( obj.uid === action.userid ) {
+                    console.log("!obj?.Datas", !obj?.Datas)
                     if(!obj?.Datas){
                         obj = {
                             ...obj,
