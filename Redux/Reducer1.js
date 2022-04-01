@@ -168,6 +168,8 @@ const Reducer1 = (state = initialState, action) => {
             let newname = false
 
             let temp = state.userData.map(obj => {
+                console.log(" obj.uid :",  obj.uid)
+                console.log(" action.userid :",  action.userid)
                 if( obj.uid === action.userid ) {
                     console.log("action.name :" ,action.name)
                     
