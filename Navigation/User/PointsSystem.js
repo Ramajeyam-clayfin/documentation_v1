@@ -14,13 +14,17 @@ const PointsSystem = () => {
   const user = useSelector(state => state.userData)
   const filters = user.map(obj => obj.Datas.Basics)
   const names = Data.map(obj => obj.title)
-  names.forEach(obj => console.log("obj 1 : ",obj))
-  filters.forEach(obj => console.log("obj 2 : ",obj.ActivityIndicator))
-  const filtered = names.forEach(obj1 => filters.map(obj2 => obj2[obj1] === obj1))
+  // names.forEach(obj => console.log("obj 1 : ",obj))
+  // filters.forEach(obj => console.log("obj 2 : ",obj.ActivityIndicator))
+  const filtered = filters.map(obj => Object.keys(obj).map(obj => obj) )
   console.log("filter :", filtered)
-  // for(keys as names){
-
-  // }
+  for(let keys in filters){
+    // const filtered = names.forEach((obj, keys) => filters[keys][obj])
+    for(let keys1 in keys){
+      console.log("keys :", filtered[keys][keys1])
+    }
+    // console.log("keys :", filtered[keys])
+  }
 
   
 
@@ -36,21 +40,20 @@ const PointsSystem = () => {
 
 
           <View style={[styles.card,]}>
-                <View style={{alignSelf:"center"}}>
-                    <Text style={styles.cardText}>View</Text>
-                </View>
-          <View style={{flexDirection:"row"}}  >
-                
-                
+              <View >
+                <Text style={[styles.cardText,{fontWeight:"bold", fontSize:30}]}>View</Text>
+              </View>
+              <View style={{flexDirection:"row"}}  >
+                    
                 <View style={{alignSelf:"center"}}>
                   <Progress.Bar progress={0.3} width={200} />
                 </View>
 
                 <View style={{alignSelf:"flex-end"}}>
-                    <Text  style={styles.cardText}>80 %</Text>
+                  <Text  style={[styles.cardText,{ marginLeft:30}]}>80 %</Text>
                 </View>
 
-            </View>
+              </View>
             </View>
           
           <View style={[styles.card1,{marginBottom:0, flex:0.4}]}>
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
         alignSelf:"center",
     },
     cardText :{
-        alignSelf:"center",
+        // alignSelf:"center",
         fontWeight:"bold",
         fontSize:18
     }
