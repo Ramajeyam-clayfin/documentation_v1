@@ -21,7 +21,7 @@ export const Comp1 = (props) => {
           <View style={{flex:0.06, width:50}}>
             <Pressable 
                     
-                    onPress={()=> navigation.navigate("Components1")}
+                    onPress={()=> navigation.navigate("Components")}
                     // underlayColor="#61dafb"
                     >
                     <Ionicons name="arrow-back" size={40}></Ionicons>

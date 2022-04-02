@@ -65,56 +65,94 @@ function TabNavigator () {
     )
 }
 
+function HomeNavigation () {
+    return(
+        <Drawer.Navigator
+        screenOptions={{ headerShown: false }}
+        drawerContent={(props) => <DrawerContent {...props} />}
+        >
+            <Drawer.Screen  name="Home1"  component={Home} />
+        </Drawer.Navigator>
+    )
+}
+function GuidesNavigation () {
+    return(
+        <Drawer.Navigator
+        screenOptions={{ headerShown: false }}
+        drawerContent={(props) => <DrawerContent {...props} />}
+        >
+            <Drawer.Screen  name="Guides1"  component={Guides} />
+        </Drawer.Navigator>
+    )
+}
+function GithubNavigation () {
+    return(
+        <Drawer.Navigator
+        screenOptions={{ headerShown: false }}
+        drawerContent={(props) => <DrawerContent {...props} />}
+        >
+            <Drawer.Screen  name="Github1"  component={Github} />
+        </Drawer.Navigator>
+    )
+}
+function ComponentsNavigation () {
+    return(
+        <Drawer.Navigator
+        screenOptions={{ headerShown: false }}
+        drawerContent={(props) => <DrawerContent {...props} />}
+        >
+            <Drawer.Screen  name="Components1"  component={Components} />
+        </Drawer.Navigator>
+    )
+}
+function Comp1Navigation () {
+    return(
+        <Drawer.Navigator
+        screenOptions={{ headerShown: false }}
+        drawerContent={(props) => <DrawerContent {...props} />}
+        >
+            <Drawer.Screen  name="Comp2"  component={Comp1} />
+        </Drawer.Navigator>
+    )
+}
+
+function Navigation () {
+
+    return(
+        
+                <Drawer.Navigator 
+                    
+                    screenOptions={{ headerShown: false }}
+                    drawerContent={(props) => <DrawerContent {...props} />}
+                    >
+                    <Drawer.Screen name="User1" component={TabNavigator} />
+
+                </Drawer.Navigator>
+    )
+}
 
 
 function StackNavigation() {
     return (
-     
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Components1" component={Components} />
-            <Stack.Screen name="Comp1" component={Comp1} />
-        </Stack.Navigator>
+        <DataProvider>
+            <Provider store={store}>
+                <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Register" component={Register} />
+                    <Stack.Screen name="Home" component={HomeNavigation} />
+                    <Stack.Screen name="Guides" component={GuidesNavigation} />
+                    <Stack.Screen name="Github" component={GithubNavigation} />
+                    <Stack.Screen name="User" component={Navigation} />
+                    <Stack.Screen name="Components" component={ComponentsNavigation} />
+                    <Stack.Screen name="Comp1" component={Comp1Navigation} />
+                    
+                </Stack.Navigator>
+            </Provider>
+        </DataProvider>
     );
   }
 
 
 
- function Navigation () {
 
-    return(
-        
-        <DataProvider>
-            <Provider store={store}>
-                <Drawer.Navigator 
-                    initialRouteName="Login"
-                    screenOptions={{
-                        headerShown: false
-                    }}
-                    drawerContent={(props) => <DrawerContent {...props} />}
-                    >
-                        
-                    <Drawer.Screen  name="Login"  component={Login} />
-
-                    <Drawer.Screen  name="Register"  component={Register} />
-
-                    <Drawer.Screen  name="Home"  component={Home} />
-
-                    <Drawer.Screen name="Guides" component={Guides} />
-
-                    <Drawer.Screen name="Components" component={StackNavigation} />                  
-
-                    <Drawer.Screen name="User" component={TabNavigator} />
-
-                    <Drawer.Screen name="Github" component={Github} />
-                     {/* <Drawer.Screen name="Api" component={Api} /> */}
-
-                    {/* <Drawer.Screen name="Architecture" component={Architecture} /> */}
-
-                    {/* <Drawer.Screen name="Blog" component={Blog} /> */}
-                </Drawer.Navigator>
-            </Provider>
-        </DataProvider>
-    )
-}
-
-export default Navigation;
+export default StackNavigation;

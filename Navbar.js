@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image,  } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback  } from 'react-native';
 import { Ionicons, } from "@expo/vector-icons";
 import React from 'react';
 import { Datas } from './Context/Context';
 import { auth } from './firebase';
+import { useNavigation } from '@react-navigation/native';
 
 
 export const Navbar = ({navigation}) => {
   const { setLogin} = React.useContext(Datas)
 
+  const navi = useNavigation()
+  // console.log("navig",navi)
   // const handleSignOut = () => {
   //   auth
   //     .signOut()
@@ -28,8 +31,14 @@ export const Navbar = ({navigation}) => {
             color="white"
             onPress={() => navigation.toggleDrawer()}
           />
-          <Image style={{height:35, width:35}} resizeMode="cover" source={require('./Images/logo.png')}/>
-          <Text style={styles.headertext}>React Native</Text>
+          <TouchableWithoutFeedback
+            onPress={()=> navigation.navigate("Home")}
+          >
+            <View style={styles.navbar}>
+              <Image style={{height:35, width:35}} resizeMode="cover" source={require('./Images/logo.png')}/>
+              <Text style={styles.headertext}>React Native</Text>
+            </View>
+          </TouchableWithoutFeedback>
           <View style={styles.searchicon}>
             <Ionicons 
                 name="search"

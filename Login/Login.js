@@ -5,34 +5,25 @@ import { Validation } from "./Validation"
 import { Datas } from "../Context/Context";
 import { auth, getData } from "../firebase";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
-import { initialize } from "../Redux/Actions";
 
 export const Login = () => {
     const { userid, setUserid ,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
 
     const navigation = useNavigation()
-    // const dispatch = useDispatch()
-    // console.log("navigation",navigation)
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, SetLoading] = useState(false)
 
-   
-
-    // useEffect(()=>{
-    //   getData(getusers)
-      
-    // },[])
-
-    // useEffect(()=>{ dispatch(initialize(user, userid)) },[user && userid])
     const Navi = () => {
      
       const unsubscribe = auth.onAuthStateChanged(usered => {
         if (usered) {
-          // dispatch(initialize(user, userid))
           navigation.navigate("Home")
+          // navigation.reset({
+          //   index: 0,
+          //   routes: [{ name: 'Home' }],
+          // })
         }
         // else navigation.navigate("Login")
       })
@@ -40,28 +31,6 @@ export const Login = () => {
       return unsubscribe
     }
 
-    // useEffect(() => {
-     
-    //   const unsubscribe = auth.onAuthStateChanged(usered => {
-    //     if (usered) {
-    //       // console.log("usered :", usered)
-    //       dispatch(initialize(user, usered.uid))
-    //       navigation.navigate("Home")
-    //     }
-    //     // else navigation.navigate("Login")
-    //   })
-  
-    //   return unsubscribe
-    // }, [trigger])
-
-    // const loginhandler = () => {
-    //     let result = Validation(email, password);
-    //     setemailerror(result.errormessageuser)
-    //     setpasserror(result.errormessagepass)
-    //     handleLogin()
-    //     result.errormessageuser.length || result.errormessagepass.length ? setLogin(false) : setLogin(true)
-
-    // }
     
     const handleLogin = () => {
       SetLoading(true);
@@ -76,12 +45,8 @@ export const Login = () => {
           setPassword("")
           setpasserror("") 
           Navi()
-          // const getusers = (users) => setUser(users)
-          // getData(getusers)
-          
-          // const useruid = auth.currentUser.uid
-          // setUserid(useruid)
-        }).catch(error => {
+        })
+        .catch(error => {
           SetLoading(false);
           if (error.code === 'auth/invalid-email') {
             setpasserror('Invalid-email !')

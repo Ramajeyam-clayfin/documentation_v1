@@ -32,7 +32,7 @@ const Profile = () => {
             <Ionicons 
                 name="person-circle-outline"
                 size={250}
-                color="#808080"
+                color="#20232a"
                 // onPress={() => navigation.navigate("User")}
             />
         </View>
@@ -43,16 +43,16 @@ const Profile = () => {
                 <Text style={styles.text2}>{email}</Text>
             </View>
             <TouchableOpacity 
-                style={styles.regisBtn}
+                style={[styles.regisBtn,{backgroundColor:"#61dafb"}]}
                 // onPress={()=>navigation.navigate("Register")}
             >
-                  <Text style={styles.loginText}>CHANGE PASSWORD</Text>
+                  <Text style={[styles.loginText,{fontWeight:"normal"}]}>CHANGE PASSWORD</Text>
               </TouchableOpacity>
               <TouchableOpacity 
-                style={styles.regisBtn} 
+                style={[styles.regisBtn,{backgroundColor:"#ff3333"}]} 
                 onPress={()=>handleSignOut()}
             >
-                  <Text style={styles.loginText}>LOGOUT</Text>
+                  <Text style={[styles.loginText,{color:"white", fontSize:20}]}>LOGOUT</Text>
               </TouchableOpacity>
         </View>
         </View>
@@ -72,14 +72,14 @@ const styles = StyleSheet.create({
         backgroundColor:"#ffffff"
     },
     text:{
-        color:"white",
+        color:"#00b8e6",
         fontSize:40,
         alignSelf:"center",
         marginBottom: 8,
         fontWeight:"bold",
     },
     text2:{
-        color:"white",
+        color:"#20232a",
         fontSize:15,
         alignSelf:"center"
     },
@@ -106,14 +106,14 @@ const styles = StyleSheet.create({
     container3: {
         flex:1,
         width: "90%",
-        backgroundColor:"#404040",
+        backgroundColor:"#e6e6e6",
         alignSelf:"center",
         justifyContent:"center",
         alignItems:"center",
         margin: 10,
         marginBottom: 90,
         borderRadius:30,
-        borderColor:"#61dafb",
+        borderColor:"#00e600",
         borderWidth:4
         
         // boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
@@ -125,14 +125,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 40,
-        backgroundColor: "#61dafb",
+        backgroundColor: "#9966ff",
         borderColor:"#000000",
         borderWidth:1
       },
       
     loginText:{
         fontSize:15,
-        // fontWeight:"bold",
+        fontWeight:"bold",
         color:"black"
       }
 })

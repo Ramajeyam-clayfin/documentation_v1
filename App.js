@@ -2,7 +2,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Navigation  from './Navigation';
-import StackNavigation from "./Navigation/Components/Navigation";
+import StackNavigation from './Navigation';
 
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
     <View style={styles.container}>
       
       <NavigationContainer>
-          <Navigation/>
+          <StackNavigation/>
       </NavigationContainer>
     </View>
   );

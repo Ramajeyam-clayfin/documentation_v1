@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableHighlight,   } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableHighlight, Alert  } from 'react-native';
 import { Navbar } from './Navbar';
 import React, {useEffect, useContext, useState} from 'react'
 import { Datas } from './Context/Context';
@@ -12,7 +12,7 @@ import { initialize } from './Redux/Actions';
 export const Home = (props) => {
 
     const { navigation } = props
-    const {  login, trigger, userid } = useContext(Datas)
+    const {  login, trigger, userid, setUserid } = useContext(Datas)
     
     const [user , setUser ] = useState([])
     const userData = useSelector(state => state.userData)
@@ -24,6 +24,7 @@ export const Home = (props) => {
           const getusers = (values) => {
             setUser(values)
             const useruid = auth.currentUser.uid;
+            setUserid(useruid)
             console.log("Disaptching Initialize with ID : ", useruid);
             dispatch(initialize(values, useruid))
             dispatch(createData(useruid))
@@ -36,6 +37,24 @@ export const Home = (props) => {
       return unsubscribe
       
     },[trigger])
+
+    React.useEffect(
+      () => navigation.addListener('beforeRemove', (e) => {
+          const action = e.data.action;
+          e.preventDefault();
+          Alert.alert(
+            'Are You sure want to Logout !',
+            '',
+            [
+              { text: "Cancel", style: 'cancel', onPress: () => {} },
+              {
+                text: 'Logout',
+                style: 'destructive',
+                onPress: () => navigation.dispatch(action),
+              },
+            ]
+          );
+        }),[navigation] );
     
     return(
       <View style={[styles.container,{ top: login ? 35 : 0}]}>

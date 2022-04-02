@@ -13,6 +13,8 @@ import { useNavigation } from '@react-navigation/native';
  function DrawerContent(props) {
      
     const navigation = useNavigation()
+    // const navi = props
+    // console.log("navi", navi)
     const user = useSelector(state => state.userData)
 
     const name1 = user.map(obj => obj.name)
@@ -25,7 +27,7 @@ import { useNavigation } from '@react-navigation/native';
     const handleSignOut = () => {
         auth
           .signOut()
-          .then(() => navigation.navigate("Login"))
+          .then(() => {navigation.navigate("Login");props.navigation.closeDrawer()})
           .catch(error => alert(error.message))
       }
     
@@ -60,12 +62,12 @@ import { useNavigation } from '@react-navigation/native';
                                     name="home"
                                     size={size}
                                     color={color}
-                                    onPress={() => {navigation.navigate('Home')}}
+                                    onPress={() => { props.navigation.closeDrawer();navigation.navigate('Home'); }}
                                 />
                             )}
                             
                             label="Home"
-                            onPress={() => {navigation.navigate('Home')}}
+                            onPress={() => { props.navigation.closeDrawer();navigation.navigate('Home'); }}
                         />
                         <DrawerItem 
                            icon={({color, size}) => (
@@ -73,11 +75,11 @@ import { useNavigation } from '@react-navigation/native';
                                 name="book"
                                 size={size}
                                 color={color}
-                                onPress={() => {navigation.navigate('Home')}}
+                                onPress={() => { props.navigation.closeDrawer(); navigation.navigate('Guides'); }}
                             />
                         )}
                             label="Guides"
-                            onPress={() => {navigation.navigate('Guides')}}
+                            onPress={() => { props.navigation.closeDrawer() ;navigation.navigate('Guides');}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
@@ -85,11 +87,11 @@ import { useNavigation } from '@react-navigation/native';
                                     name="library"
                                     size={size}
                                     color={color}
-                                    onPress={() => {navigation.navigate('Home')}}
+                                    onPress={() => {props.navigation.closeDrawer();navigation.navigate('Components'); }}
                                 />
                             )}
                             label="Components"
-                            onPress={() => {navigation.navigate('Components')}}
+                            onPress={() => {props.navigation.closeDrawer();navigation.navigate('Components'); }}
                         />
                         {/* <DrawerItem 
                             label="Api"
@@ -109,11 +111,11 @@ import { useNavigation } from '@react-navigation/native';
                                     name="logo-github"
                                     size={size}
                                     color={color}
-                                    onPress={() => {navigation.navigate('Home')}}
+                                    onPress={() => {props.navigation.closeDrawer();navigation.navigate('Github'); }}
                                 />
                             )}
                             label="Github"
-                            onPress={() => {navigation.navigate('Github')}}
+                            onPress={() => {props.navigation.closeDrawer(); navigation.navigate('Github'); }}
                         />
                         
                     </Drawer.Section>
