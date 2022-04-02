@@ -9,13 +9,16 @@ import { Login } from "./Login/Login";
 import { Home }  from "./Home"
 import { Guides } from "./Navigation/Guides/Home";
 import { Components } from "./Navigation/Components/Home";
-import { Api } from "./Navigation/Api/Home";
-import { Architecture } from "./Navigation/Architecture/Home";
-import { Blog } from "./Navigation/Blog/Home";
+// import { Api } from "./Navigation/Api/Home";
+// import { Architecture } from "./Navigation/Architecture/Home";
+// import { Blog } from "./Navigation/Blog/Home";
 import { Github } from "./Navigation/Github/Home";
 import Profile from "./Navigation/User/Profile";
 import Progress from "./Navigation/User/Progress";
 import PointsSystem from "./Navigation/User/PointsSystem";
+import { Comp1 } from "./Navigation/Components/Comp1/Home";
+import Register from "./Login/Register";
+import Search from "./Search";
 
 import { DataProvider } from './Context/Context';
 import { createStore } from 'redux';
@@ -31,8 +34,7 @@ const Tab = createBottomTabNavigator();
 
 
 
-import { Comp1 } from "./Navigation/Components/Comp1/Home";
-import Register from "./Login/Register";
+
 
 
 function TabNavigator () {
@@ -137,6 +139,7 @@ function StackNavigation() {
         <DataProvider>
             <Provider store={store}>
                 <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+
                     <Stack.Screen name="Login" component={Login} />
                     <Stack.Screen name="Register" component={Register} />
                     <Stack.Screen name="Home" component={HomeNavigation} />
@@ -145,6 +148,8 @@ function StackNavigation() {
                     <Stack.Screen name="User" component={Navigation} />
                     <Stack.Screen name="Components" component={ComponentsNavigation} />
                     <Stack.Screen name="Comp1" component={Comp1Navigation} />
+                    <Stack.Screen name="Search" component={Search} />
+                    
                     
                 </Stack.Navigator>
             </Provider>

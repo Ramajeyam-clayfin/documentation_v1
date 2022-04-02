@@ -95,6 +95,7 @@ const Reducer1 = (state = initialState, action) => {
                         else {
                             obj = {
                                 ...obj,
+                                Total:(action.precent)/2,
                                 Datas : {
                                     Intro : action.precent 
                                 }
@@ -123,9 +124,13 @@ const Reducer1 = (state = initialState, action) => {
                         else {
                             console.log("action.prercent :", action.precent)
                             const tot = (action.precent / 26 * 100)
+                            const value1 = obj.Datas.Intro
+                            const value2 = Math.round(tot)
+                            const tot2 = (value1+value2)/2
 
                             obj = {
                                 ...obj,
+                                Total: tot2 ,
                                 Datas : {
                                     ...obj.Datas,
                                     Basics : {
@@ -133,13 +138,7 @@ const Reducer1 = (state = initialState, action) => {
                                         Total : {
                                             Total_Basics : 26,
                                             completed :  action.precent,
-                                            Overall_Basics : Math.round(tot),
-                                            // View : false,
-                                            // Text : false,
-                                            // Image : false,
-                                            // TextInput : false,
-                                            // ScrollView : false,
-                                            // StyleSheet : false,
+                                            Overall_Basics : Math.round(tot)
                                         }
                                     }
                                 }
@@ -186,8 +185,12 @@ const Reducer1 = (state = initialState, action) => {
                                     console.log("reducer-newname")
                                     newname = true
                                     const tot = ((obj.Datas.Basics.Total.completed + 1)  / 26 * 100)
+                                    const value1 = obj.Datas.Intro
+                                    const value2 = Math.round(tot)
+                                    const tot2 = (value1+value2)/2
                                     obj = {
                                         ...obj,
+                                        Total: tot2 ,
                                         Datas : {
                                             ...obj.Datas,
                                             Basics : {
@@ -197,7 +200,6 @@ const Reducer1 = (state = initialState, action) => {
                                                     ...obj.Datas.Basics.Total,
                                                     completed :  (obj.Datas.Basics.Total.completed + 1),
                                                     Overall_Basics : Math.round(tot),
-                                                    // [action.name] : true
                                                 }
                                             }
                                         }

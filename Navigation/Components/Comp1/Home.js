@@ -24,7 +24,7 @@ export const Comp1 = (props) => {
                     onPress={()=> navigation.navigate("Components")}
                     // underlayColor="#61dafb"
                     >
-                    <Ionicons name="arrow-back" size={40}></Ionicons>
+                    <Ionicons name="arrow-back" size={40} color="white"></Ionicons>
                   </Pressable>
             </View>
 
@@ -38,20 +38,20 @@ export const Comp1 = (props) => {
                 <View style={{ flex:0.6,flexDirection:"row", margin:10,justifyContent:"space-between", }}>
                   {page === 0 ? null :<View >
                   <TouchableHighlight 
-                    style={{backgroundColor:"white", borderRadius:40, }} 
+                    style={{backgroundColor:"#333333", borderRadius:40, }} 
                     onPress={()=>{page === 0 ? setPage(0) : setPage(page-1)}}
                     underlayColor="#61dafb"
                     >
-                    <Ionicons name="arrow-back" size={50}></Ionicons>
+                    <Ionicons name="arrow-back" size={50} color="white"></Ionicons>
                   </TouchableHighlight>
                   </View>}
                   {page === 2 ? null :<View >
                   <TouchableHighlight 
-                    style={{backgroundColor:"white", borderRadius:40,  }}
+                    style={{backgroundColor:"#333333", borderRadius:40,  }}
                     onPress={()=>{page === 2 ? setPage(2) : setPage(page+1)}}
                     underlayColor="#61dafb"
                     >
-                    <Ionicons name="arrow-forward" size={50}></Ionicons>
+                    <Ionicons name="arrow-forward" size={50} color="white" ></Ionicons>
                   </TouchableHighlight>
                   </View>}
                 </View>
@@ -64,7 +64,8 @@ export const Comp1 = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top:35
+    top:35,
+    backgroundColor: '#333333', 
   },
   container2 : {
     // flex:1, 

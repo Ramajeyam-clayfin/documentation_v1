@@ -12,9 +12,8 @@ import { initialize } from './Redux/Actions';
 export const Home = (props) => {
 
     const { navigation } = props
-    const {  login, trigger, userid, setUserid } = useContext(Datas)
+    const {  login, trigger, userid, setUserid, allusers, setAllusers } = useContext(Datas)
     
-    const [user , setUser ] = useState([])
     const userData = useSelector(state => state.userData)
     const dispatch = useDispatch()
 
@@ -22,7 +21,7 @@ export const Home = (props) => {
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
           const getusers = (values) => {
-            setUser(values)
+            setAllusers(values)
             const useruid = auth.currentUser.uid;
             setUserid(useruid)
             console.log("Disaptching Initialize with ID : ", useruid);
@@ -72,12 +71,6 @@ export const Home = (props) => {
                   >
                   <Text>GET STARTED</Text>
                 </TouchableHighlight>
-                {/* <TouchableHighlight 
-                  style={styles.learn_btn}
-                  onPress={()=>navigation.navigate("Components")}
-                  >
-                  <Text style={{ color:'#61dafb', fontSize: 20}}>{"Learn Basics >"}</Text>
-                </TouchableHighlight> */}
         </View> 
       </View>
      

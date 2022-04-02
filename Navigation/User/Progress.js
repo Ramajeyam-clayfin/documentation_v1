@@ -1,20 +1,71 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native'
+import React, {useContext} from 'react'
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Ionicons, } from "@expo/vector-icons";
 import { useSelector } from 'react-redux';
 import { Navbar } from '../../Navbar';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
+import { Datas } from '../../Context/Context';
+import { getData } from '../../firebase';
 
 const Progress = () => {
     const navigation = useNavigation()
+    const { allusers, userid, setAllusers } = useContext(Datas)
+    const [refreshing, setRefreshing] = React.useState(false);
+    // console.log("checking3 :", allusers)
+    
     const user = useSelector(state => state.userData)
+
+    const name1 = user.map(obj => obj.name)
+    const name = name1.toString()
     const checking = user.map(obj => obj.Datas.Intro)
-    const intro = Number(checking)
     const checking2 = user.map(obj => obj.Datas.Basics.Total.Overall_Basics)
+
+    const intro = Number(checking)
     const components = Number(checking2)
-    console.log("checking2", components)
+
+    const Sorted = allusers.sort((a, b) => (b?.Total - a?.Total))
+
+    // console.log("Sorted :", Sorted)
+
+    const LeaderBoard = ({ item, index }) => {
+        return(
+            <View style={[styles.card, {backgroundColor: (item.name === name) ? "#05c5fa" : "#00ff99" }]} key={index} >
+                <View style={{ alignItems:"center"}}>
+                    <Ionicons 
+                    name="person-circle-outline"
+                    size={40}
+                    color="#000000"
+                    />
+                </View>
+                
+                <View style={{alignSelf:"center"}}>
+                    <Text style={styles.cardText}>{item.name}</Text>
+                </View>
+
+                <View style={{alignSelf:"center"}}>
+                    <Text  style={styles.cardText}>{item.Total} %</Text>
+                </View>
+
+            </View>
+        )
+    }
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        
+        const getusers = (values) => {
+            setAllusers(values)
+            console.log("Disaptching Initialize with ID : ", userid)
+            setRefreshing(false)
+          } 
+          console.log("GetData is calling")
+          getData(getusers)
+          
+        
+      }
+
   return (
     <View style={styles.container1}>
          <StatusBar style="auto" />
@@ -59,107 +110,14 @@ const Progress = () => {
         <View style={styles.container3}>
             <Text style={styles.heading}>LeaderBoard</Text>
             <View style={{flexShrink:1, paddingBottom:15}}>
-                <ScrollView>
-                <View style={styles.card}>
-                    <View style={{ alignItems:"center"}}>
-                        <Ionicons 
-                        name="person-circle-outline"
-                        size={40}
-                        color="#000000"
-                        />
-                    </View>
-                    
-                    <View style={{alignSelf:"center"}}>
-                        <Text style={styles.cardText}>Ramajeyam</Text>
-                    </View>
-
-                    <View style={{alignSelf:"center"}}>
-                        <Text  style={styles.cardText}>70 %</Text>
-                    </View>
-
-                </View>
-
-                <View style={styles.card}>
-                    <Ionicons 
-                    name="person-circle-outline"
-                    size={40}
-                    color="#000000"
+                
+                    <FlatList
+                        data={Sorted}
+                        keyExtractor={(item, index) => index}
+                        renderItem={({ item, index }) => LeaderBoard({ item, index })}
+                        refreshing={refreshing}
+                        onRefresh={() => onRefresh()}
                     />
-                    <Text style={styles.cardText}>Vursha</Text>
-                    <Text  style={styles.cardText}>80 %</Text>
-
-                </View>
-                <View style={styles.card}>
-                    <Ionicons 
-                    name="person-circle-outline"
-                    size={40}
-                    color="#000000"
-                    />
-                    <Text style={styles.cardText}>Leena</Text>
-                    <Text  style={styles.cardText}>90 %</Text>
-
-                </View>
-                <View style={styles.card}>
-                    <Ionicons 
-                    name="person-circle-outline"
-                    size={40}
-                    color="#000000"
-                    />
-                    <Text style={styles.cardText}>Keerthana</Text>
-                    <Text  style={styles.cardText}>99 %</Text>
-
-                </View>
-                <View style={styles.card}>
-                    <Ionicons 
-                    name="person-circle-outline"
-                    size={40}
-                    color="#000000"
-                    />
-                    <Text style={styles.cardText}>Keerthana</Text>
-                    <Text  style={styles.cardText}>99 %</Text>
-
-                </View>
-                <View style={styles.card}>
-                    <Ionicons 
-                    name="person-circle-outline"
-                    size={40}
-                    color="#000000"
-                    />
-                    <Text style={styles.cardText}>Keerthana</Text>
-                    <Text  style={styles.cardText}>99 %</Text>
-
-                </View>
-                <View style={styles.card}>
-                    <Ionicons 
-                    name="person-circle-outline"
-                    size={40}
-                    color="#000000"
-                    />
-                    <Text style={styles.cardText}>Keerthana</Text>
-                    <Text  style={styles.cardText}>99 %</Text>
-
-                </View>
-                <View style={styles.card}>
-                    <Ionicons 
-                    name="person-circle-outline"
-                    size={40}
-                    color="#000000"
-                    />
-                    <Text style={styles.cardText}>Keerthana</Text>
-                    <Text  style={styles.cardText}>99 %</Text>
-
-                </View>
-                <View style={styles.card}>
-                    <Ionicons 
-                    name="person-circle-outline"
-                    size={40}
-                    color="#000000"
-                    />
-                    <Text style={styles.cardText}>Keerthana</Text>
-                    <Text  style={styles.cardText}>99 %</Text>
-
-                </View>
-                </ScrollView>
             </View>
         </View>
         </View>
@@ -217,7 +175,6 @@ const styles = StyleSheet.create({
         marginTop:10,
         width:"90%",
         alignSelf:"center",
-        backgroundColor:"#00ff99"
     },
     cardText :{
         alignSelf:"center",

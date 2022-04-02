@@ -43,6 +43,7 @@ export const Navbar = ({navigation}) => {
             <Ionicons 
                 name="search"
                 size={26}
+                onPress={() => navigation.navigate("Search")}
             />
           </View>
           <View style={styles.logout}>

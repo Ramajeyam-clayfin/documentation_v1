@@ -66,7 +66,7 @@ export const Item3 = () => {
       // flex:1, 
       height: 550,
       backgroundColor: '#333333', 
-      margin:20, 
+      margin:5, 
       borderRadius:20, 
       padding:20,
     },

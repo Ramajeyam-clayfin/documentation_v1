@@ -9,10 +9,11 @@ export const DataProvider = (props) =>{
     const [trigger , setTrigger ] = useState(true)
     const [number, setnumber] = useState();
     const [userid, setUserid] = useState();
+    const [allusers, setAllusers] = useState();
 
     return(
          <>
-            <Datas.Provider value={{userid, setUserid, emailerror, setemailerror, passerror, setpasserror, login, setLogin, number, setnumber, trigger , setTrigger  }} >
+            <Datas.Provider value={{allusers, setAllusers, userid, setUserid, emailerror, setemailerror, passerror, setpasserror, login, setLogin, number, setnumber, trigger , setTrigger  }} >
                 {props.children}
             </Datas.Provider>
          </>
