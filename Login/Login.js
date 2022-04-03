@@ -105,7 +105,7 @@ export const Login = () => {
               <TouchableOpacity
                 onPress={()=>Alert.alert(
                   'Please Wait for future Updates !',
-                  "Cuurent version Doesn't support This Feature",
+                  "Current version Doesn't support This Feature",
                   [
                     {
                       text: 'Ok',

@@ -46,7 +46,7 @@ const Profile = () => {
                 style={[styles.regisBtn,{backgroundColor:"#61dafb"}]}
                 onPress={()=>Alert.alert(
                     'Please Wait for future Updates !',
-                    "Cuurent version Doesn't support This Feature",
+                    "Current version Doesn't support This Feature",
                     [
                       {
                         text: 'Ok',

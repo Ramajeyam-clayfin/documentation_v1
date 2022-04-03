@@ -18,7 +18,7 @@ export const Navbar = ({navigation}) => {
             onPress={() => navigation.toggleDrawer()}
           />
           <TouchableWithoutFeedback
-            onPress={()=> navigation.navigate("Home")}
+            onPress={()=> {navigation.closeDrawer();navigation.navigate("Home")}}
           >
             <View style={styles.navbar}>
               <Image style={{height:35, width:35}} resizeMode="cover" source={require('./Images/logo.png')}/>
