@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React from 'react'
 import { Navbar } from '../../Navbar'
 import { StatusBar } from 'expo-status-bar';
@@ -9,23 +9,60 @@ import Data from "../Components/HomeData.json"
 import { useSelector } from 'react-redux';
 
 
-const PointsSystem = () => {
+const MyProgress = () => {
   const navigation = useNavigation()
   const user = useSelector(state => state.userData)
   const filters = user.map(obj => obj.Datas.Basics)
   const names = Data.map(obj => obj.title)
-  // names.forEach(obj => console.log("obj 1 : ",obj))
-  // filters.forEach(obj => console.log("obj 2 : ",obj.ActivityIndicator))
-  const filtered = filters.map(obj => Object.keys(obj).map(obj => obj) )
-  console.log("filter :", filtered)
+
+  let object1
+  let array1 =[]
+  let array2 = []
+
   for(let keys in filters){
-    // const filtered = names.forEach((obj, keys) => filters[keys][obj])
-    for(let keys1 in keys){
-      console.log("keys :", filtered[keys][keys1])
-    }
-    // console.log("keys :", filtered[keys])
+     object1 = filters[keys]
+
+    for(let keys in object1){
+      names.forEach(obj => {
+        if(obj === keys){
+          array2 = [...array2, obj]
+          array1 = [ {...array1[0] , [obj] : object1[keys]} ]
+        }
+        
+      })
+   }
   }
 
+  const topic =({ item }) => {
+    return(
+      <>
+      {
+        array2.map(obj1 => (
+          <View style={[styles.card,]}>
+              <View >
+                <Text style={[styles.cardText,{fontWeight:"bold", fontSize:20, color:"#61dafb", marginBottom:10}]}>{obj1} :</Text>
+              </View>
+              <View style={{flexDirection:"row"}}  >
+                    
+                <View style={{alignSelf:"center"}}>
+                  <Progress.Bar 
+                    progress={((item[obj1])/100)} 
+                    width={200} 
+                    color={item[obj1] === 30 ? "#ff0000" : (item[obj1] === 60 ? "#ff5c33" : (item[obj1] === 90 ? "#00cc66" : "#ffff") )  } 
+                  />
+                </View>
+
+                <View style={{alignSelf:"flex-end"}}>
+                  <Text  style={[styles.cardText,{fontWeight:"bold", marginLeft:30}]}>{item[obj1]} %</Text>
+                </View>
+
+              </View>
+          </View>
+        ))
+      }
+      </>
+    )
+  }
   
 
 
@@ -35,28 +72,15 @@ const PointsSystem = () => {
       <Navbar navigation={navigation}/>
       <View style={{flex:1}}>
         <View style={styles.container2}>
-          <Text style={styles.heading}>POINTS DISTRIBUTION</Text>
+          <Text style={styles.heading}>MY PROGRESS</Text>
 
+          <FlatList
+              data={array1}
+              keyExtractor={(item, index) => index}
+              renderItem={({ item }) => topic({ item })}
+          />
 
-
-          <View style={[styles.card,]}>
-              <View >
-                <Text style={[styles.cardText,{fontWeight:"bold", fontSize:30}]}>View</Text>
-              </View>
-              <View style={{flexDirection:"row"}}  >
-                    
-                <View style={{alignSelf:"center"}}>
-                  <Progress.Bar progress={0.3} width={200} />
-                </View>
-
-                <View style={{alignSelf:"flex-end"}}>
-                  <Text  style={[styles.cardText,{ marginLeft:30}]}>80 %</Text>
-                </View>
-
-              </View>
-            </View>
-          
-          <View style={[styles.card1,{marginBottom:0, flex:0.4}]}>
+          {/* <View style={[styles.card1,{marginBottom:0, flex:0.4}]}>
             <Text style={[styles.h1, {fontWeight:"bold", color:"#61dafb", fontSize:30, marginBottom:10}]}>Guides :</Text>
             <Text style={[styles.h1,{marginBottom:20, alignSelf:"center"}]}>Introduction : ( 1 - 100 ) .</Text>
           </View>
@@ -68,7 +92,7 @@ const PointsSystem = () => {
             <Text style={[styles.h1,{marginBottom:10}]}>Examples : 1 Point</Text>
             <Text style={[styles.h1,{marginBottom:2}]}>Total : 26 Points</Text>
             <Text style={[styles.h1,  {color:"red", fontSize:12, marginBottom:20}]}>( * Total Percentage of Componenets is calculated of how much points you earned )</Text>
-          </View>
+          </View> */}
         </View>
       </View>
       
@@ -76,7 +100,7 @@ const PointsSystem = () => {
   )
 }
 
-export default PointsSystem
+export default MyProgress
 
 const styles = StyleSheet.create({ 
     container1:{
@@ -134,10 +158,12 @@ const styles = StyleSheet.create({
         marginTop:10,
         width:"90%",
         alignSelf:"center",
+        backgroundColor:"#000000"
     },
     cardText :{
         // alignSelf:"center",
         fontWeight:"bold",
-        fontSize:18
+        fontSize:18,
+        color:"white"
     }
 })

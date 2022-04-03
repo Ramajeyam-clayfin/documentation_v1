@@ -31,7 +31,7 @@ const Progress = () => {
 
     const LeaderBoard = ({ item, index }) => {
         return(
-            <View style={[styles.card, {backgroundColor: (item.name === name) ? "#05c5fa" : "#00ff99" }]} key={index} >
+            <View style={[styles.card, {backgroundColor: (item.name === name) ? "#ff5c33" : "#00ff99" }]} key={index} >
                 <View style={{ alignItems:"center"}}>
                     <Ionicons 
                     name="person-circle-outline"

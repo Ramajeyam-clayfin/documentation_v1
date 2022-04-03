@@ -15,7 +15,7 @@ import { Components } from "./Navigation/Components/Home";
 import { Github } from "./Navigation/Github/Home";
 import Profile from "./Navigation/User/Profile";
 import Progress from "./Navigation/User/Progress";
-import PointsSystem from "./Navigation/User/PointsSystem";
+import MyProgress from "./Navigation/User/PointsSystem";
 import { Comp1 } from "./Navigation/Components/Comp1/Home";
 import Register from "./Login/Register";
 import Search from "./Search";
@@ -49,7 +49,7 @@ function TabNavigator () {
                 iconName = focused ? 'people-outline' : 'people-outline';
               } else if (route.name === 'Progress') {
                 iconName = focused ? 'podium-outline' : 'podium-outline';
-              } else if (route.name === 'PointsSystem') {
+              } else if (route.name === 'MyProgress') {
                   iconName = focused ? 'information-circle-outline' : 'information-circle-outline' ;
               }
   
@@ -62,7 +62,7 @@ function TabNavigator () {
         >
             <Tab.Screen name="Profile" component={Profile} />
             <Tab.Screen name="Progress" component={Progress} />
-            <Tab.Screen name="PointsSystem" component={PointsSystem} />
+            <Tab.Screen name="MyProgress" component={MyProgress} />
         </Tab.Navigator>
     )
 }
