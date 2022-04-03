@@ -2,16 +2,14 @@ import React from "react"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import DrawerContent from "./DrawerContent";
 import { Ionicons } from "@expo/vector-icons";
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 import { Login } from "./Login/Login";
 import { Home }  from "./Home"
 import { Guides } from "./Navigation/Guides/Home";
 import { Components } from "./Navigation/Components/Home";
-// import { Api } from "./Navigation/Api/Home";
-// import { Architecture } from "./Navigation/Architecture/Home";
-// import { Blog } from "./Navigation/Blog/Home";
 import { Github } from "./Navigation/Github/Home";
 import Profile from "./Navigation/User/Profile";
 import Progress from "./Navigation/User/Progress";
@@ -19,13 +17,15 @@ import MyProgress from "./Navigation/User/PointsSystem";
 import { Comp1 } from "./Navigation/Components/Comp1/Home";
 import Register from "./Login/Register";
 import Search from "./Search";
+// import { Api } from "./Navigation/Api/Home";
+// import { Architecture } from "./Navigation/Architecture/Home";
+// import { Blog } from "./Navigation/Blog/Home";
+import DrawerContent from "./DrawerContent";
 
 import { DataProvider } from './Context/Context';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 import Reducer1 from './Redux/Reducer1';
 
-const store = createStore( Reducer1, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ); 
+const store = createStore( Reducer1 ); 
 
 
 const Drawer = createDrawerNavigator();

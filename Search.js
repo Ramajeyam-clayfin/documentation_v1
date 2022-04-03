@@ -1,27 +1,22 @@
-import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import React,{useState, useContext} from 'react'
+import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import { Ionicons, } from "@expo/vector-icons";
-import Data from './Navigation/Components/HomeData.json'
-import { Datas } from './Context/Context';
 import { useNavigation } from '@react-navigation/native';
 
+import Data from './Navigation/Components/HomeData.json'
+import { Datas } from './Context/Context';
+
+
 const Search = () => {
-    const {number, setnumber, userid} = useContext(Datas)
+    const { setnumber } = useContext(Datas)
     const [search, setSearch] =useState()
     const [FilteredData, setFilteredData] =useState([])
     const navigation =useNavigation()
 
     const searchFilterFunction = (text) => {
-        // Check if searched text is not blank
         if (text) {
-          // Inserted text is not blank
-          // Filter the Datas and update FilteredData
-          const newData = Data.filter(
-            function (item) {
-              // Applying filter for the inserted text in search bar
-              const itemData = item.title
-                  ? item.title.toUpperCase()
-                  : ''.toUpperCase();
+          const newData = Data.filter( item => {
+              const itemData = item.title ? item.title.toUpperCase()  : ''.toUpperCase();
               const textData = text.toUpperCase();
               return itemData.indexOf(textData) > -1;
             }
@@ -29,12 +24,11 @@ const Search = () => {
           setFilteredData(newData);
           setSearch(text);
         } else {
-          // Inserted text is blank
-          // Update FilteredData with Datas
-          setFilteredData(Data);
+          setFilteredData([]);
           setSearch(text);
         }
       };
+
       const ItemView = ({item}) => {
         return (
           <TouchableOpacity  onPress={()=> { setnumber(item.id); navigation.navigate("Comp1");}}>
@@ -63,8 +57,6 @@ const Search = () => {
                         name="search-outline"
                         size={30}
                         color="black"
-                        
-                        // onPress={() => navigation.navigate("User")}
                     />
               </View>
               <View style={{flex:1}}>
@@ -83,9 +75,7 @@ export default Search
 const styles = StyleSheet.create({
     container1:{
         flex:1,
-        // top:35,
         backgroundColor:"#222222",
-        // marginBottom:10,
     },
     inputView: {
         top:35,
@@ -104,13 +94,9 @@ const styles = StyleSheet.create({
         height: 50,
         flex: 1,
         padding: 10,
-        // marginLeft: 20,
       },
       cardstyle:{
-        // top:5,
-        padding:20,  
-        
-        // backgroundColor:'#f2f2f2',  
+        padding:20,   
       },
       innercard1:{
         backgroundColor:"#61dafb",

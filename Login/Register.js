@@ -1,17 +1,16 @@
-
-
+import React,{useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
-import React,{useState, useEffect} from 'react'
-import { Datas } from "../Context/Context";
-import { useDispatch } from "react-redux";
-import { auth, getData } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from "react-redux";
+
+import { Datas } from "../Context/Context";
+import { auth, getData } from '../firebase';
 import { add_user, initialize } from "../Redux/Actions";
 
 const Register = () => {
 
-  const { setUserid ,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
+  const { setUserid ,setpasserror,  passerror, trigger , setTrigger} = React.useContext(Datas)
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -81,7 +80,6 @@ const Register = () => {
               size="large" 
               color="#61dafb"
               style={{flex:1, justifyContent: 'center', alignItems:"center"}} 
-              // animating={loading}
           
             />) : (
             <>
@@ -137,14 +135,14 @@ export default Register
 
 const styles = StyleSheet.create({
     container1:{
-        flex:1,
-        top:38,
-        backgroundColor:"#20232a",
-        alignItems: "center",
+      flex:1,
+      top:38,
+      backgroundColor:"#20232a",
+      alignItems: "center",
       justifyContent: "center",
     },
     header:{
-        height: 30,
+      height: 30,
       marginBottom: 30,
       color:"white",
       fontSize:23
@@ -152,11 +150,9 @@ const styles = StyleSheet.create({
     },
     inputView:{
         backgroundColor: "#fff",
-        //   borderRadius: 30,
           width: "70%",
           height: 45,
           marginBottom: 20,
-        //   alignItems: "center",
 
     },
     TextInput:{
@@ -167,7 +163,6 @@ const styles = StyleSheet.create({
     },
     loginBtn: {
         width: "70%",
-      //   borderRadius: 25,
         height: 50,
         alignItems: "center",
         justifyContent: "center",

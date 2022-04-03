@@ -1,25 +1,11 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback  } from 'react-native';
 import { Ionicons, } from "@expo/vector-icons";
-import React from 'react';
-import { Datas } from './Context/Context';
-import { auth } from './firebase';
-import { useNavigation } from '@react-navigation/native';
+
 
 
 export const Navbar = ({navigation}) => {
-  const { setLogin} = React.useContext(Datas)
-
-  const navi = useNavigation()
-  // console.log("navig",navi)
-  // const handleSignOut = () => {
-  //   auth
-  //     .signOut()
-  //     .then(() => {
-  //       navigation.navigate("Login")
-  //     })
-  //     .catch(error => alert(error.message))
-  // }
 
     return(
         <View style={styles.container}>
@@ -49,7 +35,7 @@ export const Navbar = ({navigation}) => {
           <View style={styles.logout}>
           <Ionicons 
                   name="person-circle-outline"
-                  size={30}
+                  size={35}
                   color="white"
                   onPress={() => navigation.navigate("User")}
               />
@@ -89,6 +75,7 @@ const styles = StyleSheet.create({
   },
   logout:{
     color:"white",
-    marginLeft:15
+    marginLeft:15,
+    marginRight:5
   }
 });

@@ -1,7 +1,6 @@
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import Navigation  from './Navigation';
 import StackNavigation from './Navigation';
 
 

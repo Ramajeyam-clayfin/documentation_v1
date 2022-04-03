@@ -1,13 +1,13 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator} from "react-native"
-import { StatusBar } from 'expo-status-bar';
-import React,{useState, useEffect } from 'react'
-import { Validation } from "./Validation"
-import { Datas } from "../Context/Context";
-import { auth, getData } from "../firebase";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator, Alert} from "react-native"
+import React,{useState } from 'react'
 import { useNavigation } from "@react-navigation/native";
 
+import { Datas } from "../Context/Context";
+import { auth } from "../firebase";
+
+
 export const Login = () => {
-    const { userid, setUserid ,setpasserror, emailerror, passerror, setLogin, trigger , setTrigger} = React.useContext(Datas)
+    const { setpasserror, emailerror, passerror, trigger , setTrigger} = React.useContext(Datas)
 
     const navigation = useNavigation()
     
@@ -20,12 +20,7 @@ export const Login = () => {
       const unsubscribe = auth.onAuthStateChanged(usered => {
         if (usered) {
           navigation.navigate("Home")
-          // navigation.reset({
-          //   index: 0,
-          //   routes: [{ name: 'Home' }],
-          // })
         }
-        // else navigation.navigate("Login")
       })
   
       return unsubscribe
@@ -70,11 +65,9 @@ export const Login = () => {
               size="large" 
               color="#61dafb"
               style={{flex:1, justifyContent: 'center', alignItems:"center"}} 
-              // animating={loading}
           
             />) : (
             <>
-              {/* <StatusBar style="auto" /> */}
               <Image style={styles.image} source={require("../Images/logo.png")} />
               <Text style={styles.header}>Welcome to React</Text>
           
@@ -109,7 +102,19 @@ export const Login = () => {
                     <Text style={{color:"red", marginBottom: 10,}}>{passerror}</Text> :  null
                   }
           
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={()=>Alert.alert(
+                  'Please Wait for future Updates !',
+                  "Cuurent version Doesn't support This Feature",
+                  [
+                    {
+                      text: 'Ok',
+                      style: 'destructive',
+                      onPress: () =>{},
+                    },
+                  ]
+                  )}
+              >
                   <Text style={styles.forgot_button}>Forgot Password?</Text>
               </TouchableOpacity>
           
@@ -134,23 +139,19 @@ const styles = StyleSheet.create({
     },
    
     image: {
-    //   marginBottom: 5,
     },
    
     inputView: {
       backgroundColor: "#fff",
-    //   borderRadius: 30,
       width: "70%",
       height: 45,
       marginBottom: 20,
-    //   alignItems: "center",
     },
    
     TextInput: {
       height: 50,
       flex: 1,
       padding: 10,
-      // marginLeft: 20,
     },
    
     forgot_button: {
@@ -161,7 +162,6 @@ const styles = StyleSheet.create({
    
     loginBtn: {
       width: "80%",
-    //   borderRadius: 25,
       height: 50,
       alignItems: "center",
       justifyContent: "center",
@@ -169,19 +169,17 @@ const styles = StyleSheet.create({
       backgroundColor: "#61dafb",
     },
     header:{
-        height: 30,
+      height: 30,
       marginBottom: 30,
       color:"white",
       fontSize:23
     },
     regisBtn: {
       width: "80%",
-    //   borderRadius: 25,
       height: 50,
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
-      // backgroundColor: "white",
       borderColor:"#61dafb",
       borderWidth:4
     },

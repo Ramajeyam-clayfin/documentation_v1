@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React, {useContext} from 'react'
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Ionicons, } from "@expo/vector-icons";
-import { useSelector } from 'react-redux';
-import { Navbar } from '../../Navbar';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+
+import { Navbar } from '../../Navbar';
 import { Datas } from '../../Context/Context';
 import { getData } from '../../firebase';
 
@@ -13,7 +14,6 @@ const Progress = () => {
     const navigation = useNavigation()
     const { allusers, userid, setAllusers } = useContext(Datas)
     const [refreshing, setRefreshing] = React.useState(false);
-    // console.log("checking3 :", allusers)
     
     const user = useSelector(state => state.userData)
 
@@ -26,8 +26,6 @@ const Progress = () => {
     const components = Number(checking2)
 
     const Sorted = allusers.sort((a, b) => (b?.Total - a?.Total))
-
-    // console.log("Sorted :", Sorted)
 
     const LeaderBoard = ({ item, index }) => {
         return(
@@ -62,8 +60,6 @@ const Progress = () => {
           } 
           console.log("GetData is calling")
           getData(getusers)
-          
-        
       }
 
   return (
@@ -78,7 +74,6 @@ const Progress = () => {
                     value={intro}
                     activeStrokeColor={'#05c5fa'}
                     inActiveStrokeColor={'#61dafb'}
-                    //   activeStrokeSecondaryColor={'#cdf3fe'}
                     inActiveStrokeOpacity={0.2}
                     progressValueColor={'#61dafb'}
                     valueSuffix={'%'}
@@ -95,7 +90,6 @@ const Progress = () => {
                 value={components}
                 activeStrokeColor={'#05c5fa'}
                 inActiveStrokeColor={'#61dafb'}
-                //   activeStrokeSecondaryColor={'#cdf3fe'}
                 inActiveStrokeOpacity={0.2}
                 progressValueColor={'#61dafb'}
                 valueSuffix={'%'}
@@ -130,8 +124,6 @@ export default Progress
 const styles = StyleSheet.create({
     container1:{
         flex:1,
-        // alignItems:"center",
-        // justifyContent:"center",
         top:35
     },
     container2:{
@@ -145,8 +137,6 @@ const styles = StyleSheet.create({
         width: "90%",
         backgroundColor:"#e6e6e6",
         alignSelf:"center",
-        // justifyContent:"center",
-        // alignItems:"center",
         margin: 10,
         marginBottom: 90,
         borderRadius:30,
@@ -166,7 +156,6 @@ const styles = StyleSheet.create({
         justifyContent:"space-between",
         paddingLeft:20,
         paddingRight:50,
-        // paddingBottom: 10,
         borderWidth:3,
         borderColor:"black",
         borderRadius:30,

@@ -1,20 +1,17 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Avatar, Title, Caption, Drawer, Text, TouchableRipple,  Switch } from 'react-native-paper';
+import { Title, Caption, Drawer } from 'react-native-paper';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useSelector } from 'react-redux';
-import { Ionicons, } from "@expo/vector-icons";
-
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { auth } from './firebase';
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
+
+import { auth } from './firebase';
 
 
  function DrawerContent(props) {
      
     const navigation = useNavigation()
-    // const navi = props
-    // console.log("navi", navi)
     const user = useSelector(state => state.userData)
 
     const name1 = user.map(obj => obj.name)
@@ -22,12 +19,11 @@ import { useNavigation } from '@react-navigation/native';
     const email1 = user.map(obj => obj.email)
     const email = email1.toString()
 
-    // console.log("Drawer :", name)
 
     const handleSignOut = () => {
         auth
           .signOut()
-          .then(() => {navigation.navigate("Login");props.navigation.closeDrawer()})
+          .then(() => {props.navigation.closeDrawer(); navigation.navigate("Login");})
           .catch(error => alert(error.message))
       }
     
@@ -119,16 +115,6 @@ import { useNavigation } from '@react-navigation/native';
                         />
                         
                     </Drawer.Section>
-                    {/* <Drawer.Section title="Preferences">
-                        <TouchableRipple onPress={() => {}}>
-                            <View style={styles.preference}>
-                                <Text>Biometric</Text>
-                                <View pointerEvents="none">
-                                    <Switch />
-                                </View>
-                            </View>
-                        </TouchableRipple>
-                    </Drawer.Section> */}
                 </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>

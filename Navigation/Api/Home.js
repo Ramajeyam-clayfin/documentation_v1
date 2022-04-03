@@ -1,10 +1,10 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,  ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Navbar } from '../../Navbar';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import WebView from 'react-native-webview';
 
 export const Api = (props) => {
+  
     const { navigation } = props
     const loading = () => {
       return(
@@ -20,7 +20,6 @@ export const Api = (props) => {
     return(
         <View style={styles.container}>
             <StatusBar style="auto" />
-            {/* <Navbar navigation={navigation}/> */}
             <TouchableOpacity
              onPress={()=>navigation.navigate("Home")}
              style={{borderColor:"black", borderWidth:2, width:100, height:30, backgroundColor:"#61dafb"}}
@@ -46,7 +45,6 @@ export const Api = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#333333',
     top:35
   },
 });

@@ -1,20 +1,19 @@
+import React, {useEffect, useContext} from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableHighlight, Alert  } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableHighlight, Alert  } from 'react-native';
+import { useDispatch } from 'react-redux';
+
 import { Navbar } from './Navbar';
-import React, {useEffect, useContext, useState} from 'react'
 import { Datas } from './Context/Context';
 import { auth, getData } from './firebase';
-import { useSelector, useDispatch } from 'react-redux';
-import { createData } from './Redux/Actions';
-import { initialize } from './Redux/Actions';
+import { createData, initialize } from './Redux/Actions';
 
 
 export const Home = (props) => {
 
     const { navigation } = props
-    const {  login, trigger, userid, setUserid, allusers, setAllusers } = useContext(Datas)
+    const {  login, trigger, setUserid, setAllusers } = useContext(Datas)
     
-    const userData = useSelector(state => state.userData)
     const dispatch = useDispatch()
 
     useEffect(()=>{

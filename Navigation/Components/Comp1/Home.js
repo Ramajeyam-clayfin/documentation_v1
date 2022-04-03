@@ -1,9 +1,9 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Dimensions, Pressable, TouchableHighlight,  } from 'react-native';
+import { StyleSheet, View, Pressable, TouchableHighlight,  } from 'react-native';
 import { Ionicons, } from "@expo/vector-icons";
+
 import { Navbar } from '../../../Navbar';
-import { Datas } from '../../../Context/Context';
 import { Item1 } from './Item1/Item1';
 import { Item2 } from './Item2/Item2';
 import { Item3 } from './Item3/Item3';
@@ -11,7 +11,6 @@ import { Item3 } from './Item3/Item3';
 
 export const Comp1 = (props) => {
     const { navigation } = props
-    const {number, setnumber} = useContext(Datas)
     const [page, setPage] = useState(0);
    
     return(
@@ -22,7 +21,6 @@ export const Comp1 = (props) => {
             <Pressable 
                     
                     onPress={()=> navigation.navigate("Components")}
-                    // underlayColor="#61dafb"
                     >
                     <Ionicons name="arrow-back" size={40} color="white"></Ionicons>
                   </Pressable>
@@ -68,7 +66,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#333333', 
   },
   container2 : {
-    // flex:1, 
     height: 550,
     backgroundColor: '#333333', 
     margin:20, 

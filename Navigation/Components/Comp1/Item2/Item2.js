@@ -1,17 +1,19 @@
 import React, {useContext, useEffect} from "react"
-import { Datas } from "../../../../Context/Context"
-import { View, Text, StyleSheet, Pressable, Linking, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native"
+import { View, Text, StyleSheet, Linking, TouchableOpacity, ActivityIndicator } from "react-native"
+import { useDispatch } from "react-redux"
+import WebView from "react-native-webview"
+
 import Data from './Item2data.json'
 import Data1 from '../Item1/Item1data.json'
-import WebView from "react-native-webview"
-import { useDispatch } from "react-redux"
+import { Datas } from "../../../../Context/Context"
 import { updateuser } from "../../../../Redux/Actions"
 
 export const Item2 = () => {
+
   const { number, userid} = useContext(Datas)
   const dispatch = useDispatch()
-  const temp = Data.filter(obj => obj.id === number )
 
+  const temp = Data.filter(obj => obj.id === number )
   const temp1 = Data1.filter(obj => obj.id === number )
   const name1 = temp1.map(obj => obj.name)
   const percent = 60
@@ -54,7 +56,6 @@ export const Item2 = () => {
           </React.Fragment>
         ))}
         
-         
       </View>
 
     )
@@ -62,7 +63,6 @@ export const Item2 = () => {
 
   const styles = StyleSheet.create({
     container1 : {
-      // flex:1, 
       height: 550,
       backgroundColor: '#333333', 
       margin:5, 
@@ -87,10 +87,3 @@ export const Item2 = () => {
     justifyContent:"center"
   }
   });
-
-  {/* <View style={styles.container2}>
-            
-            <ScrollView >
-              <Text style={{color:"black", fontSize:10}}>{ obj.content}</Text>
-            </ScrollView>
-            </View> */}

@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { Ionicons, } from "@expo/vector-icons";
 import React from 'react'
-import { Navbar } from '../../Navbar';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
+import { Ionicons, } from "@expo/vector-icons";
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+
+import { Navbar } from '../../Navbar';
 import { auth } from '../../firebase';
 
 const Profile = () => {
+
     const navigation = useNavigation()
     const user = useSelector(state => state.userData)
 
@@ -33,10 +35,8 @@ const Profile = () => {
                 name="person-circle-outline"
                 size={250}
                 color="#20232a"
-                // onPress={() => navigation.navigate("User")}
             />
         </View>
-        {/* <View style={styles.line}><View></View></View> */}
         <View style={styles.container3}>
             <View>
                 <Text style={styles.text}>{name}</Text>
@@ -44,7 +44,17 @@ const Profile = () => {
             </View>
             <TouchableOpacity 
                 style={[styles.regisBtn,{backgroundColor:"#61dafb"}]}
-                // onPress={()=>navigation.navigate("Register")}
+                onPress={()=>Alert.alert(
+                    'Please Wait for future Updates !',
+                    "Cuurent version Doesn't support This Feature",
+                    [
+                      {
+                        text: 'Ok',
+                        style: 'destructive',
+                        onPress: () =>{},
+                      },
+                    ]
+                    )}
             >
                   <Text style={[styles.loginText,{fontWeight:"normal"}]}>CHANGE PASSWORD</Text>
               </TouchableOpacity>
@@ -66,9 +76,7 @@ export default Profile
 const styles = StyleSheet.create({
     container1:{
         flex:1,
-       top:35,
-        // justifyContent:"center",
-        // alignItems:"center"
+        top:35,
         backgroundColor:"#ffffff"
     },
     text:{
@@ -85,11 +93,8 @@ const styles = StyleSheet.create({
     },
     container2: {
         flex:1,
-        // top:38,
-        // backgroundColor:"#ffffff",
         justifyContent:"center",
         alignItems:"center",
-        // marginBottom:35
         
     },
     innercircle:{
@@ -115,8 +120,6 @@ const styles = StyleSheet.create({
         borderRadius:30,
         borderColor:"#00e600",
         borderWidth:4
-        
-        // boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
     },
     regisBtn: {
         width: "70%",

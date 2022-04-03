@@ -1,10 +1,13 @@
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,  ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Navbar } from '../../Navbar';
+import { StyleSheet,  View, ActivityIndicator } from 'react-native';
 import WebView from 'react-native-webview';
 
+import { Navbar } from '../../Navbar';
+
+
 export const Github = (props) => {
+  
     const { navigation } = props
 
     const loading = () => {
@@ -22,12 +25,6 @@ export const Github = (props) => {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <Navbar navigation={navigation}/>
-            {/* <TouchableOpacity
-             onPress={()=>navigation.navigate("Home")}
-             style={{borderColor:"black", borderWidth:2, width:100, height:30, backgroundColor:"#61dafb"}}
-            >
-              <Text style={{marginLeft:10, color:"black", fontSize:18, fontWeight:'bold'}}>{`<< Home`}</Text>
-            </TouchableOpacity> */}
             <View style={{flex:1}}>
 
                   <WebView 

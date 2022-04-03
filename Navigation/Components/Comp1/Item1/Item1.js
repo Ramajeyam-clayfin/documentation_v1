@@ -1,11 +1,12 @@
 
 import React,{useContext, useEffect} from "react"
 import { View, Text, StyleSheet } from "react-native"
+import { useDispatch } from "react-redux"
+
 import Data from './Item1data.json'
 import { Datas } from "../../../../Context/Context"
-import WebView from "react-native-webview"
 import { updateuser } from "../../../../Redux/Actions"
-import { useDispatch } from "react-redux"
+
 
 export const Item1 = () => {
     const { number, userid} = useContext(Datas)
@@ -14,7 +15,6 @@ export const Item1 = () => {
     const name1 = temp.map(obj => obj.name);
     const percent = 30
     const name = name1.toString()
-    // console.log("Name:", name)
 
     useEffect(()=>{
       console.log(`Dispatching Action : ${name}`)
@@ -42,7 +42,6 @@ export const Item1 = () => {
 
   const styles = StyleSheet.create({
     container1 : {
-      // flex:1, 
       height: 550,
       backgroundColor: '#333333', 
       margin:5, 

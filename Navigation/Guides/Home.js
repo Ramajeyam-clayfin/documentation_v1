@@ -1,32 +1,36 @@
-
+import { useContext, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,  ScrollView, Dimensions, Image, TouchableHighlight } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { useDispatch } from 'react-redux'
+
 import { Navbar } from '../../Navbar';
 import { Datas } from '../../Context/Context';
-import { useDispatch } from 'react-redux'
 import { updateuser } from '../../Redux/Actions';
-import { useContext, useEffect, useState } from 'react';
+
 
 export const Guides = (props) => {
+
     const { navigation } = props
     const { userid } = useContext(Datas)
-    const [intro, setIntro] = useState(10)
-    const overall = 0;
+    const dispatch = useDispatch();
+
     const view1height = ( Math.round(Dimensions.get('screen').height)/3)
     const view1width = ( Math.round(Dimensions.get('screen').width)-25)
-    const dispatch = useDispatch();
-    // console.log("userData :", userData)
+
+    const [intro, setIntro] = useState(10)
+    
     const name = "Intro";
     const name2 = "Overall_Basics"
-    useEffect(()=>{
-       dispatch(updateuser(userid, intro, name))
-    },[])
+    const overall = 0;
+
+    useEffect( ()=>{ dispatch(updateuser(userid, intro, name)) },[])
+
     const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
       const paddingToBottom = 30;
-      return layoutMeasurement.height + contentOffset.y >=
-        contentSize.height - paddingToBottom;
+      return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
     };
+
     return(
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -63,9 +67,8 @@ export const Guides = (props) => {
 
                       <View style={{height:500, margin:20 , flexDirection:"row", marginBottom:20, }}>
                       <WebView
-                        // source={{  html: '<script async src="https://snack.expo.dev/embed.js"></script><div data-snack-id="@ramajeyam/hello-world" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:100%;width:auto"></div>' }}
-                        source={{  uri: 'https://snack.expo.dev/@ramajeyam/hello-world' }}
-                        style={{marginTop:19 }}
+                        source={{ uri: 'https://snack.expo.dev/@ramajeyam/hello-world' }}
+                        style={{marginTop:0 }}
                       />
                       </View>
                     <Text style={{fontSize:18, margin:15, marginBottom:20}}>The above is a Snack Player. It’s a handy tool created by Expo to embed and run React Native projects and share how they render in platforms like Android and iOS.
@@ -73,7 +76,6 @@ export const Guides = (props) => {
                      
                        <TouchableHighlight 
                         style={styles.learn_btn}
-                        // underlayColor="#ffff"
                         onPress={()=>navigation.navigate("Components")}
                         >
                         <Text style={{ color:'#61dafb', fontSize: 20}}>{"Learn Basics >"}</Text>
@@ -90,7 +92,6 @@ export const Guides = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#333333',
     top:35
   },
   learn_btn:{

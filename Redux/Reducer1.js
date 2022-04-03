@@ -59,7 +59,6 @@ const Reducer1 = (state = initialState, action) => {
                 console.log("CREATE_DATA :", action.userid)
                 let temp = state.userData.map(obj => {
                 if( obj.uid === action.userid ) {
-                    console.log("!obj?.Datas", !obj?.Datas)
                     if(!obj?.Datas){
                         obj = {
                             ...obj,
@@ -163,7 +162,6 @@ const Reducer1 = (state = initialState, action) => {
         case actions.UPDATE_USER_OTHERS : {
             console.log("UPDATE_USER_OTHERS :")
 
-            // const array = ["View", "Text", "Image", "TextInput", "ScrollView", "StyleSheet"]
             let newname = false
 
             let temp = state.userData.map(obj => {
@@ -172,8 +170,6 @@ const Reducer1 = (state = initialState, action) => {
                 if( obj.uid === action.userid ) {
                     console.log("action.name :" ,action.name)
                     
-                    // array.map (name => {
-                    //     if( name == action.name){
                             console.log(`obj.Datas?.Basics?.${action.name} :`, obj.Datas?.Basics?.[action.name])
                             console.log(`obj.Datas?.Basics?.Total?.${action.name} :`, obj.Datas?.Basics?.Total?.[action.name])
                             if( obj.Datas?.Basics?.[action.name] >= action.precent ){
@@ -181,7 +177,6 @@ const Reducer1 = (state = initialState, action) => {
                             }
                             else if( action.precent == 90 ){
 
-                                // if(obj.Datas?.Basics?.Total?.[action.name] == false){
                                     console.log("reducer-newname")
                                     newname = true
                                     const tot = ((obj.Datas.Basics.Total.completed + 1)  / 26 * 100)
@@ -206,7 +201,6 @@ const Reducer1 = (state = initialState, action) => {
                                     }
                                     console.log("send Data :", obj)
                                     updateuserothers(obj, action.name, newname)
-                                // }
                             }
                             else {
                                 obj = {
@@ -226,10 +220,6 @@ const Reducer1 = (state = initialState, action) => {
                         return obj
                     })
                     
-                // }
-                
-                // return obj
-                // })
             return {
                 userData:temp
             }

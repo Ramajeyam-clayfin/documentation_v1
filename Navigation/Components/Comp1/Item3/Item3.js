@@ -1,12 +1,13 @@
 import React, {useContext, useEffect} from "react"
-import { Datas } from "../../../../Context/Context"
 import { useDispatch } from "react-redux";
+import WebView from "react-native-webview";
+import { View, Text, StyleSheet, Linking, TouchableOpacity, ActivityIndicator } from "react-native"
+
+import Data  from "./Item3data.json";
 import { updateuser } from "../../../../Redux/Actions";
 import Data1 from '../Item1/Item1data.json'
+import { Datas } from "../../../../Context/Context"
 
-import { View, Text, StyleSheet, Pressable, Linking, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native"
-import Data  from "./Item3data.json";
-import WebView from "react-native-webview";
 
 
 export const Item3 = () => {
@@ -55,7 +56,6 @@ export const Item3 = () => {
           </React.Fragment>
         ))}
         
-         
       </View>
 
     )
@@ -63,7 +63,6 @@ export const Item3 = () => {
 
   const styles = StyleSheet.create({
     container1 : {
-      // flex:1, 
       height: 550,
       backgroundColor: '#333333', 
       margin:5, 

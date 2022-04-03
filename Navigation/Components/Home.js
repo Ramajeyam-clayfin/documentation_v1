@@ -2,23 +2,25 @@
 import React, {useContext, useEffect} from "react"
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,  ScrollView, TouchableOpacity } from 'react-native';
+import { useDispatch } from "react-redux";
+
 import { Navbar } from '../../Navbar';
 import { Datas } from "../../Context/Context";
 import HomeData from './HomeData.json'
-import { useDispatch } from "react-redux";
 import { updateuser } from "../../Redux/Actions";
 
 export const Components = (props) => {
     const { navigation } = props
-    const {number, setnumber, userid} = useContext(Datas)
+    const {setnumber, userid} = useContext(Datas)
+    const dispatch = useDispatch();
+
     const completed = 1
     const name = "Overall_Basics"
     const Basic = HomeData.filter(obj => obj.id < 21)
     const Android = HomeData.filter(obj => (obj.id > 20) && (obj.id < 23))
     const IOS = HomeData.filter(obj => obj.id > 22)
 
-    // console.log(navigation.navigate)
-    const dispatch = useDispatch()
+    
 
     useEffect(()=>{
       console.log("Dispatching Action : {1}")
