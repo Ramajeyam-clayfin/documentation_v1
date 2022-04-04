@@ -19,8 +19,8 @@ const Progress = () => {
 
     const name1 = user.map(obj => obj.name)
     const name = name1.toString()
-    const checking = user.map(obj => obj.Datas.Intro)
-    const checking2 = user.map(obj => obj.Datas.Basics.Total.Overall_Basics)
+    const checking = user.map(obj => obj.Datas?.Intro)
+    const checking2 = user.map(obj => obj.Datas?.Basics?.Total?.Overall_Basics)
 
     const intro = Number(checking)
     const components = Number(checking2)
@@ -28,6 +28,7 @@ const Progress = () => {
     const Sorted = allusers.sort((a, b) => (b?.Total - a?.Total))
 
     const LeaderBoard = ({ item, index }) => {
+        console.log("item.Total :", item)
         return(
             <View style={[styles.card, {backgroundColor: (item.name === name) ? "#ff5c33" : "#00ff99" }]} key={index} >
                 <View style={{ alignItems:"center"}}>
@@ -43,7 +44,7 @@ const Progress = () => {
                 </View>
 
                 <View style={{alignSelf:"center"}}>
-                    <Text  style={styles.cardText}>{item.Total} %</Text>
+                    <Text  style={styles.cardText}>{item.Total === undefined ? 0 : item.Total} %</Text>
                 </View>
 
             </View>
