@@ -1,6 +1,7 @@
 import { LogBox } from 'react-native';
 
 LogBox.ignoreLogs(['You are overriding the original host.']);
+LogBox.ignoreLogs(['Setting a timer for a long period of time,']);
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
